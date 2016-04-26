@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Store Name | Checkout</title>
+</head>
+
+<body>
+
+<div id="frame">
+    <div id="masthead">
+        <h1><a href="index.html">Store Name</a></h1>
+
+        <!-- insert cart widget here -->
+    </div>
+
+    <div id="navigation">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="category_1.html">Category 1</a></li>
+            <li><a href="category_2.html">Category 2</a></li>
+            <li><a href="category_3.html">Category 3</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <h2>Checkout</h2>
+
+        <form onsubmit="return check(this)">
+        <p id="message">Please submit the form below to complete your order.</p>
+        <p>
+        Name: <input type="text" name="name" /> <br />
+        Address: <input type="text" name="address" /> <br />
+        City: <input type="text" name="city" /> 
+        State:
+        <select name="state">
+        <option value="">Select state...</option>
+        <option value="AK">Alaska</option>
+        <option value="AL">Alabama</option>
+        <option value="AZ">Arizona</option>
+
+        </select>
+        Zip: <input type="text" name="zip" size="5" />
+        </p>
+        
+        <p>
+        Email: <input type="text" name="email" />
+        Phone: <input type="text" name="phone" />
+        </p>
+        
+        <p>
+        Credit Card Number:  <input type="text" name="cc_number" size="16" />
+        Expiration Date:  <input type="text" name="cc_expire" size="5" />
+        Security Code:  <input type="text" name="cc_security" size="3" />
+        </p>
+        
+        <p>
+        <input type="submit" value="Place Order" />
+        </p>
+        </form>
+
+    </div>
+
+    <div id="footer">
+        footer content
+    </div>
+
+</div>
+
+</body>
+</html>

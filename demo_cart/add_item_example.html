@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Shopping Cart Example Site</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="cart.css" type="text/css" />
+<script src="cart.js"></script>
+<script src="cookies.js"></script>
+</head>
+
+<body onload="loadCart()">
+
+<h1>Shopping Cart</h1>
+<h2>Example Product Page</h2>
+
+<p>Num Items: <span id="item_count">0</span></p>
+<p><a href="cart_example.html">View Cart</a></p>
+
+<input class="add_to_cart" type="button" onclick="addToCart('ABC')" value="Add to Cart" />
+<input class="add_to_cart" type="button" onclick="addToCart('123')" value="Add to Cart" />
+<input class="add_to_cart" type="button" onclick="addToCart('xyz')" value="Add to Cart" />
+
+</body>
+</html>

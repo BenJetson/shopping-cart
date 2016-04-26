@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Store Name | Home</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/cart.css" type="text/css" />
+</head>
+
+<body onload="loadCart();">
+
+<div id="frame">
+    <div id="masthead">
+        <h1><a href="index.html">Store Name</a></h1>
+
+        <!-- begin cart link widget -->
+        <div id="cart_links">
+            <a href="cart.html"><img class="cart_icon" src="img/cart_icon.png" alt="cart icon" /></a>
+            <span class="cart_link"><a id="cart_link" href="#">Shopping Cart</a></span> <br />
+            <span class="item_count">Items (<span id="item_count">0</span>)</span>
+            <span class="checkout_link"><a id="checkout_link" href="#">Checkout</a></span>
+        </div>
+        <!-- end widget -->
+    </div>
+
+    <div id="navigation">
+        <ul>
+            <li><a class="current" href="index.html">Home</a></li>
+            <li><a href="category_1.html">Category 1</a></li>
+            <li><a href="category_2.html">Category 2</a></li>
+            <li><a href="category_3.html">Category 3</a></li>
+        </ul>
+    </div>
+
+    <div id="slideshow">
+        item slideshow goes here
+    </div>
+
+    <div id="content">
+
+        <div class="category">
+            <a href="category_1.html"><h3>Category Name</h3></a>
+            <a href="category_1.html"><img class="category_pic" src="cat_1.jpg" alt="category 1" /></a>
+            <p class="category_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sapien arcu, bibendum vel iaculis nec, viverra ut massa. Sed ornare euismod est ac vestibulum. Pellentesque non elit ipsum.
+</p>
+        </div>
+        
+        <div class="category">
+            <a href="category_2.html"><h3>Category Name</h3></a>
+            <a href="category_2.html"><img class="category_pic" src="cat_2.jpg" alt="category 2" /></a>
+            <p class="category_desc">Quisque commodo, nunc et scelerisque rutrum, elit nulla euismod arcu, in ultricies ipsum velit vel erat. Praesent imperdiet, quam ut facilisis consequat, eros diam tincidunt nisi, nec pretium neque lacus non est. </p>
+        </div>
+        
+        <div class="category">
+            <a href="category_3.html"><h3>Category Name</h3></a>
+            <a href="category_3.html"><img class="category_pic" src="cat_3.jpg" alt="category 3" /></a>
+            <p class="category_desc">Suspendisse dignissim tortor eleifend leo convallis at hendrerit magna dapibus. Aliquam non volutpat massa. Maecenas interdum tempor nisl, vitae varius quam interdum sed. </p>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        footer content
+    </div>
+
+</div>
+
+<!-- javascript -->
+<script src="js/slideshow.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/cookies.js"></script>
+
+</body>
+</html>
