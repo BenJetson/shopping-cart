@@ -112,10 +112,12 @@ div#cart {
 
 /******** widget styles ********/
 
+/*
 div#cart_links {
     float: right;
     font-family: sans-serif;
 }
+*/
 
 img.cart_icon {
     border: none;
@@ -124,16 +126,20 @@ img.cart_icon {
     margin-right: 5px;
 }
 
+/*
 .cart_link {
     font-size: 20px;
     font-weight: bold;
 }
+*/
 
+/*
 .item_count {
     color: #777777;
     font-size: 14px;
     float: left;
 }
+*/
 
 .checkout_link {
     float: right;

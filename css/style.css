@@ -1,5 +1,9 @@
 /******** layout styles ********/
 
+* {
+    font-family: Roboto;
+}
+
 body {
     background-color: #fafafa;
 /*    margin: 10px;*/

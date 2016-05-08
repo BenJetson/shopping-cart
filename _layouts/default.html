@@ -3,23 +3,20 @@
     
     {% include head.html %}
     
-    <body>
+    <body ng-controller="mainCtrl" ng-app="shoppingCart" ng-cloak>
         
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            
-            {% include header.html %}
-            
-            {% include drawer.html %}
-            
-            <md-content>
-                <div class="page-content">
-                    
-                    {{ content }}
-                    
-                    {% include footer.html %}
-                    
-                </div>
-            </md-content>
-        </div>
+        {% include header.html %}
+        
+        {% include sidenav.html %}
+        
+        <md-content md-swipe-right="toggleNav();">
+            <div class="page-content">
+                
+                {{ content }}
+                
+                {% include footer.html %}
+                
+            </div>
+        </md-content>
     </body>
 </html>

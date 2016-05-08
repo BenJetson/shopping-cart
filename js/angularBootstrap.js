@@ -1,7 +1,12 @@
-var app = angular.module('shoppingSite', ['ngMaterial']);
+var app = angular.module('shoppingCart', ['ngMaterial']);
 
-app.controller('MainCtrl', function($scope, $log, alertHandler) {
-    $log.info("Controller loaded.")
+app.controller('mainCtrl', function($scope, $log, $mdMedia, $mdSidenav, alertHandler) {
+    $log.info("Controller loaded.");
+    
+    $scope.toggleNav = function(){
+            $mdSidenav('left').toggle();
+    };
+    
 });
 
 app.service('alertHandler', function($mdDialog) {

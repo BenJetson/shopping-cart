@@ -1,12 +1,24 @@
 <header>
     
-    <md-toolbar>
+    <md-toolbar class="md-whiteframe-1dp">
 
         <!-- Title -->
         <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleNav();">
+                <md-icon class="material-icons">menu</md-icon>
+            </md-button>
             <h2>Ben's PC Parts</h2>
             <!-- Add spacer, to align navigation to the right -->
             <span flex></span>
+            
+            <md-button class="md-raised">
+                <div id="cart_links" layout="row">
+                    <md-icon class="material-icons">shopping_cart</md-icon>
+                    <!--<span class="cart_link">YOUR CART</span>-->
+                    <div>&nbsp;<span id="item_count">0</span> items</div>
+                </div>
+            </md-button>
+            
                 <!-- Navigation. We hide it in small screens. -->
     <!--
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
