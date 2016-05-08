@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+    <title>{% if page.titleInTab and page.title %}{{ (site.title + ": " + page.title) | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
     
     <link rel="stylesheet" href="{{ 'css/main.css' | prepend: site.url }}">
@@ -34,6 +34,14 @@
     <!-- Angular Application Bootstrap -->
     <script src="{{ 'js/angularBootstrap.js' | prepend: site.url }}"></script>
     
+    <!-- Cart Plugin -->
     <script src="{{ 'js/cart.js' | prepend: site.url }}"></script>
     <script src="{{ 'js/cookies.js' | prepend: site.url }}"></script>
+    
+    {% if page.needsCarousel %}
+    <!-- Image Carousels -->
+    <link rel="stylesheet" href="{{ 'css/owl.carousel.css' | prepend: site.url }}">
+    <link rel="stylesheet" href="{{ 'css/owl.theme.default.css' | prepend: site.url }}">
+    <script src="{{ 'js/owl.carousel.min.js' | prepend: site.url }}"></script>
+    {% endif %}
 </head>

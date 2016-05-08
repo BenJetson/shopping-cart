@@ -1,19 +1,113 @@
 ---
 layout: default
+title: Home
+titleInTab: false
+needsCarousel: true
 ---
 
-  <h1 class="page-heading">Posts</h1>
+<h1 class="page-heading">Home</h1>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+<div layout="row" style="max-width: 100%;overflow: clip;">
+    <md-card>
+        <md-card-content>
+            <img src="http://dummyimage.com/1000x350/dadada/000caf.png&text=carousel+here">
+<!--
+            <div id="carousel" layout="none">
+                <img src="http://dummyimage.com/1000x350/dadada/000caf.png">
+                <img src="http://dummyimage.com/1000x350/dadada/000caf.png">
+                <img src="http://dummyimage.com/1000x350/dadada/000caf.png">
+                <img src="http://dummyimage.com/1000x350/dadada/000caf.png">
+                <img src="http://dummyimage.com/1000x350/dadada/000caf.png">
+                <img src="http://dummyimage.com/1000x350/dadada/000caf.png">
+            </div>
+-->
+        </md-card-content>
+    </md-card>
+</div>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+<div layout-gt-sm="row">
+    <md-card flex=33>
+        <img ng-src="http://dummyimage.com/400x200/fdc/000.png">
+        <md-card-title>
+            <md-card-title-text>
+                <h2>Category 1</h2>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>Bla bla bla</p>
+        </md-card-content>
+    </md-card>
+    <md-card flex=33>
+        <img ng-src="http://dummyimage.com/400x200/ff9/000.png">
+        <md-card-title>
+            <md-card-title-text>
+                <h2>Category 2</h2>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>Bla bla bla</p>
+        </md-card-content>
+    </md-card>
+    <md-card flex=33>
+        <img ng-src="http://dummyimage.com/400x200/cdf/000.png">
+        <md-card-title>
+            <md-card-title-text>
+                <h2>Category 3</h2>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>Bla bla bla</p>
+        </md-card-content>
+    </md-card>
+</div>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+<div layout-gt-sm="row">
+    <md-card flex=33>
+        <img ng-src="http://dummyimage.com/400x200/fe7/000.png">
+        <md-card-title>
+            <md-card-title-text>
+                <h2>Category 4</h2>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>Bla bla bla</p>
+        </md-card-content>
+    </md-card>
+    <md-card flex=33>
+        <img ng-src="http://dummyimage.com/400x200/dbf/000.png">
+        <md-card-title>
+            <md-card-title-text>
+                <h2>Category 5</h2>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>Bla bla bla</p>
+        </md-card-content>
+    </md-card>
+    <md-card flex=33>
+        <img ng-src="http://dummyimage.com/400x200/efb/000.png">
+        <md-card-title>
+            <md-card-title-text>
+                <h2>Category 6</h2>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>Bla bla bla</p>
+        </md-card-content>
+    </md-card>
+</div>
+
+
+<!--
+<script>
+    $('#carousel').owlCarousel({
+        items: 1,
+        margin: 10,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        dots: true
+    })
+</script>
+-->

@@ -1,0 +1,31 @@
+---
+layout: default
+title: Category Example Page
+titleInTab: true
+---
+
+<h1 class="page-heading">Category Page</h1>
+
+<md-card ng-repeat="i in [1,2,3,4,5,6,7,8]">
+    <md-card-content>
+        <div layout="row">
+            <div flex=20>
+                <img src="http://dummyimage.com/150x150/ddf/000caf.png&text=photo">
+            </div>
+            <div layout="column" flex=60>
+                <h2>Product Title</h2>
+                <p>Product Desc.</p>
+            </div>
+            <div flex=20 layout="column" layout-align="end center">
+                <h2>$53.75</h2>
+                <span flex></span>
+                <md-button class="md-primary">Add to cart</md-button>
+            </div>
+        </div>
+    </md-card-content>
+<!--
+    <md-card-actions layout="row" layout-align="end center">
+        
+    </md-card-actions>
+-->
+</md-card>
