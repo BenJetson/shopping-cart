@@ -5,7 +5,9 @@
     
     <body ng-controller="mainCtrl" ng-app="shoppingCart" ng-cloak>
         
-        {% include header.html %}
+        <ui-view>
+            {% include header.html %}
+        </ui-view>
         
         {% include sidenav.html %}
         

@@ -1,113 +1,31 @@
-//************************************* Shopping Cart *************************************//
-//*                                                                                       *//
-//* Author: Jon Cooper                                                                    *//
-//* Version: 1.0                                                                          *//
-//* Release: May 1, 2016                                                                  *//
-//*                                                                                       *//
-//*                                                                                       *//
-//* Instructions:                                                                         *//
-//*                                                                                       *//
-//* 1. Copy the files cart.js, and cart.css to the folder with your site.                 *//
-//*                                                                                       *//
-//* 2. Open the cart.js file and edit the configuration section.                          *//
-//*                                                                                       *//
-//*     a. Create as many products as you want. Just make sure that the ID is unique for  *//
-//*        each item. IDs don't need to be sequential and they can include any alpha-     *//
-//*        numeric character. Product IDs are not case-sensitive.                         *//
-//*     b. Edit the shipping section. Set free_shipping to false if you plan on charging  *//
-//*        for shipping, true otherwise. Set shipping_rate to the amount you'd like to    *//
-//*        charge for shipping.                                                           *//
-//*     c. Make sure the site settings match the file names used on your site.            *//
-//*     d. Optionally, you can edit the cookie settings. The cookie_name doesn't affect   *//
-//*        how the site works. The cookie_persistence is the number of days the cart      *//
-//*        cookie will last before being deleted.                                         *//
-//*                                                                                       *//
-//* 3. Add the following lines to each page on your site:                                 *//
-//*                                                                                       *//
-//*     <link rel="stylesheet" href="cart.css" type="text/css" />                         *//
-//*     <script src="js/cart.js"></script>                                                *//
-//*                                                                                       *//
-//* 4. Add an onload event to the body of each page that needs to read cart data.         *//
-//*                                                                                       *//
-//*     <body onload="loadCart()">                                                        *//
-//*                                                                                       *//
-//* 5. On the cart page, include empty div tags with the id="cart" where you would like   *//
-//*    the cart to appear. You should not put anything between the tags. The cart.js      *//
-//*    file has functions that will automatically create a table of all items in the      *//
-//*    cart between the tags.                                                             *//
-//*                                                                                       *//
-//*     <div id="cart"></div>                                                             *//
-//*                                                                                       *//
-//*    If you preview the cart at this point, you should see a message stating the cart   *//
-//*    is empty along with a working link to the home page.                               *//
-//*                                                                                       *//
-//* 6. For each item you would like to add to the cart, you'll need to create an add-to-  *//
-//*    cart button. The buttons onclick attribute should call the addToCart function and  *//
-//*    pass the items ID as a parameter.                                                  *//
-//*                                                                                       *//
-//*     <input type="button" onclick="addToCart('001')" value="Add to cart" />            *//
-//*                                                                                       *//
-//*    You can test by clicking the button. Each time you click a button, a popup should  *//
-//*    notify you that the item was added to the cart. Visit the cart page and confirm    *//
-//*    that the items were added to the cart and price calculations are correct.          *//
-//*                                                                                       *//
-//* 7. The page that confirms an order has been successfully placed can use an onload     *//
-//*    event to empty the cart.                                                           *//
-//*                                                                                       *//
-//*     <body onload="emptyCart()">                                                       *//
-//*                                                                                       *//
-//* 8. Modify cart.css as you see fit. Most cells have unique class names which should    *//
-//*    give plenty of options regarding styling the cart table.                           *//
-//*                                                                                       *//
-//* More options:                                                                         *//
-//*                                                                                       *//
-//* a. You can also add tags to display the count of items in the cart. Each time an      *//
-//*    item is added/removed from the cart, item count will update automatically.         *//
-//*                                                                                       *//
-//*     <span id="item_count">0</span>                                                    *//
-//*                                                                                       *//
-//* b. You do not need to add a link to your checkout page as it will  be reachable by    *//
-//*    clicking 'checkout' on the cart page. However, if you do choose to provide a link  **/
-//*    to your checkout page, add an id="checkout_link" attribute. Then the link will     *//
-//*    point to the cart rather than checkout if the cart page is empty.                  *//
-//*                                                                                       *//
-//*     <a id="checkout_link" href="checkout.html">Checkout</a>                           *//
-//*                                                                                       *//
-//* c. Cart Link Widget:                                                                  *//
-//*                                                                                       *//
-//*    Instead of options a and b above, you can also include a widget which displays a   *//
-//*    cart icon, a link to the cart, the the number of items in the car, and a dynamic   *//
-//*    link to the cart or checkout page. Copy the html code from widget.txt to the html  *//
-//*    source code on the pages for which you would like to display the widget. Links     *//
-//*    created will reflect those configured in 'site settings' below. CSS for the        *//
-//*    widget can be found in cart.css.                                                   *//
-//*                                                                                       *//
-//*                                                                                       *//
-//* Disclaimer/Known isssues:                                                             *//
-//*                                                                                       *//
-//* This code is intended for instructional purposes only. No claims of fitness for       *//
-//* actual online shopping is expressed or implied. (What I'm saying here is that this    *//
-//* code does a pretty good job at replicating the front-end experience of an online      *//
-//* shopping site. However, you'd be nuts to use this unless in conjuction with some      *//
-//* robust server-side authentication scripts.)                                           *//
-//*                                                                                       *//
-//*                                                                                       *//
-//* Copyright:                                                                            *//
-//*                                                                                       *//
-//* You are free to modify this code as you like. You may share this code, modified or    *//
-//* in its original form so long as this notice remains intact.                           *//
-//*                                                                                       *//
-//*****************************************************************************************//
-
+/**
+ * Copyright (c) 2015 Jon Cooper
+ *
+ * This file is part of js-cart.
+ *
+ * Documentation, related files, and licensing can be found at
+ *
+ *     <https://github.com/joncoop/js-cart>.
+ *
+ * Disclaimer/Known isssues:
+ *
+ * This code is intended for instructional purposes only. No claims of fitness for
+ * actual online shopping is expressed or implied. (What I'm saying here is that this
+ * code does a pretty good job at replicating the front-end experience of an online
+ * shopping site. However, you'd be nuts to use this unless in conjuction with some
+ * robust server-side authentication scripts.
+ */
 
 
 //********************************** CART CONFIGURATION ***********************************//
 
 // products you sell by (id, name, price)
 var products = new Array();
-products[0] = new Product("001", "Whatchahoozit",  0.99);
-products[1] = new Product("002", "Thingamabob",    9.95);
-products[2] = new Product("003", "Doomahitchey",  20.00);
+products[0] = new Product("ABC", "Whatchahoozit",  0.99);
+products[1] = new Product("123", "Thingamabob",    9.95);
+products[2] = new Product("xyz-red", "Doomahitchy (Red)",  20.00);
+products[3] = new Product("xyz-green", "Doomahitchy (Green)",  20.00);
+products[4] = new Product("xyz-blue", "Doomahitchy (Blue)",  20.00);
 
 
 // tax rate for your state
@@ -121,18 +39,13 @@ var shipping_rate = 6.99; // (will not be applied if free_shipping = true)
 
 // site settings
 var home_page_url = "index.html";
-var cart_url = "cart.html";
-var checkout_url = "checkout.html";
-
-
-// optional settings
+var cart_url = "cart_example.html";
+var checkout_url = "checkout_example.html";
 var cart_name = "my_cart"; // (must change if multiple carts run on same domain)
-var cart_persistence = 2;  // (in days)
-
 
 
 //************** END OF CONFIGURATION, DO NOT* MODIFY CODE BELOW THIS LINE!! **************//
-//                     ( * Unless you really know what you are doing. )                    //
+//*                     ( * Unless you really know what you are doing. )                  *//
 
 
 // public functions, for use on html pages
@@ -258,10 +171,26 @@ function Product(id,name,price)
 // helper functions. don't reference these on html pages. for interal use only.
 
 /**
+ * Changes the onclick attribute for the Add-to-cart button to selected option.
+ *
+ * @param {String} option ID of selected product
+ * @param {String} button_id ID of corresponding add-to-cart button
+ */
+function setChoice(option, button_id) {
+  if (option.value.length == 0) {
+    document.getElementById(button_id).disabled = true;
+  }
+  else {
+    document.getElementById(button_id).disabled = false;
+    document.getElementById(button_id).onclick = function() { addToCart(option.value); };
+  }
+}
+
+/**
  * Searches the products array for a product ID and returns the index of that product.
  * Product IDs are not case-sensitive.
  *
- * @param {String} id  ID of product to find
+ * @param {String} id ID of product to find
  * @returns {Number} index of product, -1 if product ID is not found
  */
 function search(id)
@@ -312,6 +241,7 @@ function cartToString()
 function writeCart()
 {
     var cart_str = cartToString();
+    localStorage[cart_name] = cart_str;
     refresh();
 }
 
@@ -404,14 +334,14 @@ function cartToTable()
                         "To remove an item from your card, change the quantity to zero. " +
                         "Press 'Checkout' when you are ready to place your order.";
 
+        html_cart_str += "<div class='cart'>"
         html_cart_str += "<form id='cart_form' action='" + checkout_url + "'>";
-        html_cart_str += "<table class='cart'>";
-        html_cart_str += "<tr>";
-        html_cart_str += "<th>Item Number</th>";
-        html_cart_str += "<th>Item Name</th>";
+        html_cart_str += "<table>";
+        html_cart_str += "<tr class='column-headings'>";
+        html_cart_str += "<th>Item</th>";
         html_cart_str += "<th>Quantity</th>";
-        html_cart_str += "<th>Item Price</th>";
-        html_cart_str += "<th>Item Total</th>";
+        html_cart_str += "<th>Unit Price</th>";
+        html_cart_str += "<th>Ext. Price</th>";
         html_cart_str += "</tr>";
 
         for (i=0; i<products.length; i++)
@@ -428,11 +358,8 @@ function cartToTable()
 
             if (quantity>0)
             {
-                if (i%2==0) html_cart_str += "<tr class='item odd'>";
-                else html_cart_str += "<tr class='item even'>";
-
-                html_cart_str += "<td class='item_id'>" + id + "</td>";
-                html_cart_str += "<td class='item_name'>" + name + "</td>";
+                html_cart_str += "<tr class='item'>";
+                html_cart_str += "<td class='item_name'>" + name + "<br><span class='item_id'>ID: " + id + "</span></td>";
                 html_cart_str += "<td class='item_quantity'><input name='" + id + "' type='text' size='3' value='" + quantity + "' /></td>";
                 html_cart_str += "<td class='item_price'>$" + price.toFixed(2) + "</td>";
                 html_cart_str += "<td class='item_total'>$" + extended_price.toFixed(2) + "</td>";
@@ -440,37 +367,37 @@ function cartToTable()
             }
         }
 
-        if (!free_shipping)
-        {
-            html_cart_str += "<tr class='shipping'>";
-            html_cart_str += "<th class='shipping' colspan='4'>Shipping:</th>";
-            html_cart_str += "<td class='shipping'>$" + shipping_rate.toFixed(2) + "</td>";
-            html_cart_str += "</tr>";
-
-            sub_total += shipping_rate;
-        }
-
         html_cart_str += "<tr class='subtotal'>";
-        html_cart_str += "<th class='subtotal'colspan='4'>Subtotal:</th>";
+        html_cart_str += "<th class='subtotal'colspan='3'>Subtotal:</th>";
         html_cart_str += "<td class='subtotal'>$" + sub_total.toFixed(2) + "</th>";
         html_cart_str += "</tr>";
 
         html_cart_str += "<tr class='tax'>";
-        html_cart_str += "<th class='tax'colspan='4'>Tax:</th>";
+        html_cart_str += "<th class='tax'colspan='3'>Tax:</th>";
         html_cart_str += "<td class='tax'>$" + tax.toFixed(2) + "</th>";
         html_cart_str += "</tr>";
 
+        if (!free_shipping)
+        {
+            html_cart_str += "<tr class='shipping'>";
+            html_cart_str += "<th class='shipping' colspan='3'>Shipping:</th>";
+            html_cart_str += "<td class='shipping'>$" + shipping_rate.toFixed(2) + "</td>";
+            html_cart_str += "</tr>";
+
+            total += shipping_rate;
+        }
+
         html_cart_str += "<tr class='total'>";
-        html_cart_str += "<th class='total'colspan='4'>Total:</th>";
+        html_cart_str += "<th class='total'colspan='3'>Total:</th>";
         html_cart_str += "<td class='total'>$" + total.toFixed(2) + "</th>";
         html_cart_str += "</tr>";
         html_cart_str += "</table>"
 
-        html_cart_str += "<p class='buttons'>";
+        html_cart_str += "<div class='buttons'>";
         html_cart_str += "<input type='button' value='Update' onclick='updateCart()' />";
         html_cart_str += "<input type='submit' value='Checkout' />";
-        html_cart_str += "</p>";
         html_cart_str += "</form>"
+        html_cart_str += "</div>";
     }
     else
     {
