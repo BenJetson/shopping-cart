@@ -201,7 +201,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
         }
 
         return $scope.html_cart_str;
-        }
+    }
     
     $scope.cartToString = function() {
         $scope.cart_str ="";
