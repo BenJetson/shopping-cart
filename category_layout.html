@@ -2,24 +2,27 @@
 layout: default
 title: Category Example Page
 titleInTab: true
+storeCategory: accessories
 ---
 
 <h1 class="page-heading">Category Page</h1>
-
-<md-card ng-repeat="i in [1,2,3,4,5,6,7,8]">
+{% for item in site.data.accessories %}
+<md-card>
     <md-card-content>
         <div layout="row">
             <div flex=20>
-                <img src="https://dummyimage.com/150x150/ddf/000caf.png&text=photo">
+                <img src="{{ item.img | prepend: '/' | prepend: page.storeCategory | prepend: 'img/products/' | prepend: site.url }}">
             </div>
             <div layout="column" flex=60>
-                <h2>Product Title</h2>
-                <p>Product Desc.</p>
+                <h2>{{item.itemname}}</h2>
+                <p>{{item.desc}}</p>
             </div>
             <div flex=20 layout="column" layout-align="end center">
-                <h2>$53.75</h2>
+                <h2>${{item.price}}</h2>
                 <span flex></span>
-                <md-button class="md-primary">Add to cart</md-button>
+                <div ng-controller="storeCtrl">
+                    <md-button class="md-primary">Add to cart</md-button>
+                </div>
             </div>
         </div>
     </md-card-content>
@@ -29,3 +32,4 @@ titleInTab: true
     </md-card-actions>
 -->
 </md-card>
+{% endfor %}

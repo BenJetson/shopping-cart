@@ -56,7 +56,7 @@ var cart_name = "my_cart"; // (must change if multiple carts run on same domain)
  *
  * Usage: <body onload="loadCart()">
  */
-function loadCart()
+function loadCart() //!
 {
     var cart_str = localStorage[cart_name];
 
@@ -127,7 +127,7 @@ function addToCart(id)
  *
  * Usage: <body onload="emptyCart()">
  */
-function emptyCart()
+function emptyCart() //!
 {
     localStorage.removeItem(cart_name);
     refresh();
@@ -142,30 +142,7 @@ function emptyCart()
  * @param {String} name product name
  * @param {Number} price price of product
  */
-function Product(id,name,price)
-{
-    // fields set from constructor
-    this.id = String(id);
-    this.name = String(name);
-    this.price = Number(price);
-    var quantity = 0;
 
-    // setters
-    this.setQuantity = function(n) { quantity = n };
-
-    // getters
-    this.getId = function() { return id; };
-    this.getName = function() { return name; };
-    this.getPrice = function() { return price; };
-    this.getQuantity = function() { return quantity; };
-    this.getExtendedPrice = function() { return quantity * price; };
-
-    // for testing only
-    this.toString = function()
-    {
-        return id + "|" + name + "|" + price + "|" + quantity + "|" + this.getExtendedPrice();
-    }
-}
 
 
 // helper functions. don't reference these on html pages. for interal use only.
@@ -216,7 +193,7 @@ function search(id)
  *
  * @returns {String} HTML code for shopping cart
  */
-function cartToString()
+function cartToString() //!
 {
     var cart_str ="";
 
@@ -238,7 +215,7 @@ function cartToString()
 /**
  * Writes the cart string (a list of product ids) to local storage.
  */
-function writeCart()
+function writeCart() //!
 {
     var cart_str = cartToString();
     localStorage[cart_name] = cart_str;
@@ -248,7 +225,7 @@ function writeCart()
 /**
  * Gets new quantities from cart form, writes new cart string.
  */
-function updateCart()
+function updateCart() //!
 {
     var my_cart = document.getElementById('cart_form');
     var inputs = my_cart.getElementsByTagName('input');
@@ -273,7 +250,7 @@ function updateCart()
 /**
  * Refreshes display of cart data.
  */
-function refresh()
+function refresh() //!
 {
     var cart_area = document.getElementById("cart")
     var item_count_area = document.getElementById("item_count")
@@ -303,7 +280,7 @@ function refresh()
  *
  * @returns total number of items in cart
  */
-function getNumItems()
+function getNumItems() //!
 {
     var count = 0;
 
@@ -320,7 +297,7 @@ function getNumItems()
  *
  * @returns {String} HTML code for shopping cart
  */
-function cartToTable()
+function cartToTable() //!
 {
     var html_cart_str = "";
     var sub_total = 0;

@@ -1,0 +1,44 @@
+[
+    {
+        "img": "logitech_g105.jpg",
+        "itemname": "Logitech Gaming Keyboard G105",
+        "price": 89.95,
+        "productid": "acc001",
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_g502.jpg",
+        "itemname": "Logitech Gaming Mouse G502",
+        "price": 59.75,
+        "productid": "acc002",
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_g700s.jpg",
+        "itemname": "Logitech Wireless Gaming Mouse G700s",
+        "price": 120.65,
+        "productid": "acc003",
+        "category" : "accessories"
+    },
+    {
+        "img": "logitech_g710+.jpg",
+        "itemname": "Logitech Mechanical Gaming Keyboard G710+",
+        "price": 145.42,
+        "productid": "acc004",
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_z200.jpg",
+        "itemname": "Logitech Multimedia Speakers Z200",
+        "price": 19.95,
+        "productid": "acc005",
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_z506.jpg",
+        "itemname": "Logitech Speaker System Z506",
+        "price": 79.87,
+        "productid": "acc006",
+        "category": "accessories"
+    }
+]
