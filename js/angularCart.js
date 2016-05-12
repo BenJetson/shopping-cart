@@ -25,7 +25,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
     $scope.checkout_url = "checkout.html";
     $scope.cart_name = "bgparts_cart";
     
-    $scope.loadCart = functionfunction loadCart()
+    $scope.loadCart = function()
     {
         $scope.cart_str = localStorage[cart_name];
         
