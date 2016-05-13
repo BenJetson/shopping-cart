@@ -6,12 +6,12 @@ storeCategory: accessories
 ---
 
 <h1 class="page-heading">Category Page</h1>
-{% for item in site.data.accessories %}
+{% for item in site.data.products %}
 <md-card>
     <md-card-content>
         <div layout="row">
             <div flex=20>
-                <img src="{{ item.img | prepend: '/' | prepend: page.storeCategory | prepend: 'img/products/' | prepend: site.url }}">
+                <img src="{{ item.img | prepend: '/' | prepend: item.category | prepend: 'img/products/' | prepend: site.url }}">
             </div>
             <div layout="column" flex=60>
                 <h2>{{item.itemname}}</h2>
@@ -21,7 +21,7 @@ storeCategory: accessories
                 <h2>${{item.price}}</h2>
                 <span flex></span>
                 <div ng-controller="storeCtrl">
-                    <md-button class="md-primary">Add to cart</md-button>
+                    <md-button class="md-primary" onclick="alert('ALERT');">Add to cart</md-button>
                 </div>
             </div>
         </div>

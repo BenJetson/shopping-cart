@@ -1,0 +1,290 @@
+[
+    {
+        "img": "logitech_g105.jpg",
+        "itemname": "Logitech Gaming Keyboard G105",
+        "price": 89.95,
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_g502.jpg",
+        "itemname": "Logitech Gaming Mouse G502",
+        "price": 59.75,
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_g700s.jpg",
+        "itemname": "Logitech Wireless Gaming Mouse G700s",
+        "price": 120.65,
+        "category" : "accessories"
+    },
+    {
+        "img": "logitech_g710+.jpg",
+        "itemname": "Logitech Mechanical Gaming Keyboard G710+",
+        "price": 145.42,
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_z200.jpg",
+        "itemname": "Logitech Multimedia Speakers Z200",
+        "price": 19.95,
+        "category": "accessories"
+    },
+    {
+        "img": "logitech_z506.jpg",
+        "itemname": "Logitech Speaker System Z506",
+        "price": 79.87,
+        "category": "accessories"
+    },
+    {
+        "img": "corsair_carbide_100r.jpg",
+        "itemname": "Corsair Carbide Series 100R Case",
+        "price": 69.95,
+        "category": "cases"
+    },
+    {
+        "img": "corsair_carbide_spec-02.jpg",
+        "itemname": "Corsair Carbide Series SPEC 02 Case",
+        "price": 120.75,
+        "category": "cases"
+    },
+    {
+        "img": "corsair_graphite_780t.jpg",
+        "itemname": "Corsair Carbide Graphite Series 780t",
+        "price": 150.87,
+        "category": "cases"
+    },
+    {
+        "img": "nzxt_phantom_410.jpg",
+        "itemname": "NZXT Phantom 410 Mid-Tower Case",
+        "price": 98.55,
+        "category": "cases"
+    },
+    {
+        "img": "nzxt_s340.jpg",
+        "itemname": "NZXT S340 Case",
+        "price": 234.86,
+        "category": "cases"
+    },
+    {
+        "img": "amd_fx4300_blk-edition_am3+.jpg",
+        "itemname": "AMD FX-4300 Black Edition Unlocked Processor",
+        "price": 85.95,
+        "category": "cpus"
+    },
+    {
+        "img": "amd_fx6300_blk-edition_am3+.jpg",
+        "itemname": "AMD FX-6300 Black Edition Unlocked Processor",
+        "price": 99.99,
+        "category": "cpus"
+    },
+    {
+        "img": "amd_fx8300_blk-edition_am3+.jpg",
+        "itemname": "AMD FX-8300 Black Edition Unlocked Processor",
+        "price": 160.54,
+        "category": "cpus"
+    },
+    {
+        "img": "intel_i3_6100_lga1150.jpg",
+        "itemname": "Intel i3-6100 Processor",
+        "price": 189.99,
+        "category": "cpus"
+    },
+    {
+        "img": "intel_i5_6600k_lga1151.jpg",
+        "itemname": "Intel i5-6600K Processor",
+        "price": 239.99,
+        "category": "cpus"
+    },
+    {
+        "img": "intel_i7_6700k_lga1151.jpg",
+        "itemname": "Intel i7-6700K Processor",
+        "price": 359.87,
+        "category": "cpus"
+    },
+    {
+        "img": "corsair_air-series_af120_led_blue.jpg",
+        "itemname": "Corsair Air Series AF-120 LED Fans (Two Pack - Blue)",
+        "price": 19.95,
+        "category": "fans"
+    },
+    {
+        "img": "corsair_air-series_af120_led_green.jpg",
+        "itemname": "Corsair Air Series AF-120 LED Fans (Green)",
+        "price": 9.95,
+        "category": "fans"
+    },
+    {
+        "img": "corsair_air-series_af120_led_purple.jpg",
+        "itemname": "Corsair Air Series AF-120 LED Fans (Two Pack - Purple)",
+        "price": 19.95,
+        "category": "fans"
+    },
+    {
+        "img": "corsair_air-series_af120_led_red.jpg",
+        "itemname": "Corsair Air Series AF-120 LED Fans (Two Pack - Red)",
+        "price": 19.95,
+        "category": "fans"
+    },
+    {
+        "img": "corsair_air-series_af120_led_white.jpg",
+        "itemname": "Corsair Air Series AF-120 LED Fans (Two Pack - White)",
+        "price": 19.95,
+        "category": "fans"
+    },
+    {
+        "img": "corsair_air-series_af140_quiet.jpg",
+        "itemname": "Corsair Air Series AF-140 Quiet Fan",
+        "price": 19.95,
+        "category": "fans"
+    },
+    {
+        "img": "evga_geforce-210-1gb.jpg",
+        "itemname": "EVGA GeForce 210 GPU (1GB)",
+        "price": 59.95,
+        "category": "gpus"
+    },
+    {
+        "img": "evga_geforce-gtx-750ti-2gb.jpg",
+        "itemname": "EVGA GeForce GTX 750Ti (2GB)",
+        "price": 140.95,
+        "category": "gpus"
+    },
+    {
+        "img": "evga_geforce-gtx-980-4gb.jpg",
+        "itemname": "EVGA GeForce GTX 980 (4GB)",
+        "price": 212.85,
+        "category": "gpus"
+    },
+    {
+        "img": "msi_geforce-gt-610-2gb.jpg",
+        "itemname": "MSI GeForce GT 610 (2GB)",
+        "price": 79.25,
+        "category": "gpus"
+    },
+    {
+        "img": "msi_geforce-gtx-970-4gb.jpg",
+        "itemname": "MSI GeForce GTX 970 (4GB)",
+        "price": 238.65,
+        "category": "gpus"
+    },
+    {
+        "img": "nvidia_geforce-gtx-1080.png",
+        "itemname": "NVIDIA GeForce GTX 1080",
+        "price": 499.86,
+        "category": "gpus"
+    },
+    {
+        "img": "asus_m4a78t_am3+_atx.jpg",
+        "itemname": "ASUS M4A78T ATX Motherboard (AM3+ Socket)",
+        "price": 89.75,
+        "category": "motherboards"
+    },
+    {
+        "img": "asus_m5a97-r2.0_am3+_atx.jpg",
+        "itemname": "ASUS M5A97 ATX Motherboard (AM3+ Socket)",
+        "price": 79.64,
+        "category": "motherboards"
+    },
+    {
+        "img": "gigabyte_ga-g1_lga1151_atx.jpg",
+        "itemname": "Gigabyte GA-G1 ATX Motherboard (LGA 1151 Socket)",
+        "price": 110.87,
+        "category": "motherboards"
+    },
+    {
+        "img": "gigabyte_ga-z170x_lga1151_atx.jpg",
+        "itemname": "Gigabyte GA-Z170X ATX Motherboard (LGA 1151 Socket)",
+        "price": 74.56,
+        "category": "motherboards"
+    },
+    {
+        "img": "msi_970_am3+_atx.jpg",
+        "itemname": "MSI 970 ATX Motherboard (AM3+ Socket)",
+        "price": 98.12,
+        "category": "motherboards"
+    },
+    {
+        "img": "msi_z170a_lga1151_atx.jpg",
+        "itemname": "MSI Z170A ATX Motherboard LGA 1151 Socket",
+        "price": 94.62,
+        "category": "motherboards"
+    },
+    {
+        "img": "asus_dvd_24x_sata.jpg",
+        "itemname": "ASUS 24x DVD Optical Drive (SATA)",
+        "price": 34.78,
+        "category": "optical_drives"
+    },
+    {
+        "img": "lg_bluray_16x_sata.jpg",
+        "itemname": "LG 16x BluRay Optical Drive (SATA)",
+        "price": 43.33,
+        "category": "optical_drives"
+    },
+    {
+        "img": "lg_supermulti_24x_sata.jpg",
+        "itemname": "LG 24x SuperMulti Optical Drive (SATA)",
+        "price": 47.26,
+        "category": "optical_drives"
+    },
+    {
+        "img": "be-quiet!_650w_dark-power-pro-110.jpg",
+        "itemname": "Be Quiet! Dark Power Pro 110 Power Supply (650w)",
+        "price": 67.34,
+        "category": "power_supplies"
+    },
+    {
+        "img": "be-quiet!_750w_dark-power-pro-110.jpg",
+        "itemname": "Be Quiet! Dark Power Pro 110 Power Supply (750w)",
+        "price": 94.21,
+        "category": "power_supplies"
+    },
+    {
+        "img": "corsair_850w_rm850.jpg",
+        "itemname": "Corsair RM850 Power Supply (850w)",
+        "price": 112.21,
+        "category": "power_supplies"
+    },
+    {
+        "img": "evga_500w_100-w1-0500-kr.jpg",
+        "itemname": "EVGA 100-W1-0500-KR Power Supply (500w)",
+        "price": 57.24,
+        "category": "power_supplies"
+    },
+    {
+        "img": "evga_650w_120-g1-0650-xr.jpg",
+        "itemname": "EVGA 120-G1-0650-XR Power Supply (650w)",
+        "price": 78.36,
+        "category": "power_supplies"
+    },
+    {
+        "img": "evga_750w_120-g1-0750-xr.jpg",
+        "itemname": "EVGA 120-G1-0750-XR Power Supply (750w)",
+        "price": 84.66,
+        "category": "power_supplies"
+    },
+    {
+        "img": "corsair_dominator_8gbx4_ddr4_2133mhz.jpg",
+        "itemname": "Corsair 32GB (8GBx4) Dominator DDR4-2133mhz RAM",
+        "price": 86.84,
+        "category": "ram"
+    },
+    {
+        "img": "corsair_vengance_8gbx4_ddr4_2666mhz.jpg",
+        "itemname": "Corsair 32GB (8GBx4) Vengance DDR4-2166mhz RAM",
+        "price": 82.45,
+        "category": "ram"
+    },
+    {
+        "img": "corsair_xms3_2gbx2_ddr3_1333mhz.jpg",
+        "itemname": "Corsair 4GB (2GBx2) XMS3 DDR3-1333mhz RAM",
+        "price": 36.55,
+        "category": "ram"
+    },
+    {
+        "img": "kingston_16gbx4_ddr3_1600mhz.jpg",
+        "itemname": "Kingston 64GB (16GBx4) DDR3-1600mhz RAM",
+        "price": 89.45,
+        "category": "ram"
+    }
+]

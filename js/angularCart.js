@@ -9,8 +9,8 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
         
         $scope.productsAsJSON = response.data;
         
-        for ($scope.i = 0; i < $scope.productsAsJSON.length; i++) {
-            $scope.products.push(new Product($scope.productsAsJSON[i]['productid'], $scope.productsAsJSON[i]['itemname'], $scope.productsAsJSON[i]['price']));
+        for (i = 0; i < $scope.productsAsJSON.length; i++) {
+            $scope.products.push(new Product($scope.zeroPadString(i), $scope.productsAsJSON[i]['itemname'], $scope.productsAsJSON[i]['price']));
         }
         
         $log.debug($scope.products);
@@ -24,6 +24,16 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
     $scope.cart_url = "cart.html";
     $scope.checkout_url = "checkout.html";
     $scope.cart_name = "bgparts_cart";
+    
+    $scope.zeroPadString = function(number) {
+        if (number >= 0 && number < 1000) {
+            return ("0000" + number).slice(-4);
+        } else if (number < 0 && number > -1000) {
+            return "-" + ("0000" + Math.abs(num)).slice(-4);
+        } else {
+            return number;
+        }
+    }
     
     $scope.loadCart = function()
     {
@@ -70,6 +80,51 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
 		$scope.writeCart();
 		$scope.refresh();
 	}
+    
+    $scope.addToCart = function(id) {
+        $scope.index = $scope.search(id);
+
+        if ($scope.index>-1)
+        {
+            $scope.name = $scope.products[$scope.index].getName();
+            $scope.quantity = $scope.products[$scope.index].getQuantity();
+            $scope.addIt = false;
+
+            if ($scope.quantity==0)
+            {
+                alert("The following item was added to your cart: " + $scope.name)
+                $scope.addIt = true;
+            }
+            else
+            {
+                $scope.addIt = confirm("The item \"" + $scope.name + "\" is already in your cart. Would you like to add another?");
+            }
+        }
+        else
+        {
+            alert("Error: Invalid product ID");
+        }
+
+        if ($scope.addIt)
+        {
+            $scope.products[$scope.index].setQuantity(quantity + 1);
+            $scope.writeCart();
+        }
+
+        $scope.refresh();
+    }
+    
+    $scope.setChoice = function(option, button_id) {
+        // This will need to be modified to accomodate ng-click elements.
+        if (option.value.length == 0) {
+            document.getElementById(button_id).disabled = true;
+        }
+        else {
+            document.getElementById(button_id).disabled = false;
+            document.getElementById(button_id).onclick = function() { $scope.addToCart(option.value); };
+        }
+    }
+
     
     $scope.writeCart = function() {
         $scope.cart_str = $scope.cartToString();
@@ -221,6 +276,29 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
         return $scope.cart_str;
     }
     
+    $scope.search = function(id) {
+        $scope.search_id = id.toLowerCase();
+
+        for (var i=0; i<$scope.products.length; i++)
+        {
+            $scope.this_id = $scope.products[i].getId().toLowerCase();
+
+            if ($scope.this_id==$scope.search_id)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    
+    $scope.listProducts = function() {
+        for (i=0; i<$scope.products.length; i++)
+        {
+            document.write($scope.products[i].toString() + "<br />");
+        }
+    }
+    
 });
 
 
@@ -230,7 +308,7 @@ function Product(id,name,price)
     this.id = String(id);
     this.name = String(name);
     this.price = Number(price);
-    $scope.quantity = 0;
+    this.quantity = 0;
     
     // setters
     this.setQuantity = function(n) { quantity = n };

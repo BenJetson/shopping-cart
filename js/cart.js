@@ -87,7 +87,7 @@ function loadCart() //!
  *
  * @param {String} id of product to add
  */
-function addToCart(id)
+function addToCart(id) //!
 {
     var index = search(id);
 
@@ -153,7 +153,7 @@ function emptyCart() //!
  * @param {String} option ID of selected product
  * @param {String} button_id ID of corresponding add-to-cart button
  */
-function setChoice(option, button_id) {
+function setChoice(option, button_id) { //!
   if (option.value.length == 0) {
     document.getElementById(button_id).disabled = true;
   }
@@ -170,7 +170,7 @@ function setChoice(option, button_id) {
  * @param {String} id ID of product to find
  * @returns {Number} index of product, -1 if product ID is not found
  */
-function search(id)
+function search(id) //!
 {
     var search_id = id.toLowerCase();
 
@@ -385,7 +385,7 @@ function cartToTable() //!
 }
 
 // for testing only. writes a plain-text list of all products
-function listProducts()
+function listProducts() //!
 {
     for (i=0; i<products.length; i++)
     {
