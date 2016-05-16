@@ -10,10 +10,10 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
         $scope.productsAsJSON = response.data;
         
         for (i = 0; i < $scope.productsAsJSON.length; i++) {
-            $scope.products.push(new Product($scope.zeroPadString(i), $scope.productsAsJSON[i]['itemname'], $scope.productsAsJSON[i]['price']));
+            $scope.products.push(new Product($scope.productsAsJSON[i]['itemID'], $scope.productsAsJSON[i]['itemname'], $scope.productsAsJSON[i]['price']));
         }
         
-        $log.debug($scope.products);
+        $scope.loadCart();
         
     });
     
@@ -37,21 +37,22 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
     
     $scope.loadCart = function()
     {
-        $scope.cart_str = localStorage[cart_name];
+        $scope.cart_str = localStorage[$scope.cart_name];
+        
         
         if ($scope.cart_str!=null && $scope.cart_str.length!=0)
         {
             $scope.item_ids = $scope.cart_str.split("|");
             
             
-            for ($scope.i=0; i<$scope.item_ids.length; i++)
+            for (var i=0; i<$scope.item_ids.length; i++)
             {
                 $scope.index = $scope.search($scope.item_ids[i]);
                 
-                if (index>-1)
+                if ($scope.index>-1)
                 {
-                    $scope.q = $scope.products[index].getQuantity() + 1;
-                    $scope.products[index].setQuantity(q);
+                    $scope.q = $scope.products[$scope.index].getQuantity() + 1;
+                    $scope.products[$scope.index].setQuantity($scope.q);
                 }
             }
         }
@@ -107,7 +108,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
 
         if ($scope.addIt)
         {
-            $scope.products[$scope.index].setQuantity(quantity + 1);
+            $scope.products[$scope.index].setQuantity($scope.quantity + 1);
             $scope.writeCart();
         }
 
@@ -127,8 +128,8 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
 
     
     $scope.writeCart = function() {
-        $scope.cart_str = $scope.cartToString();
-        localStorage[$scope.cart_name] = $scope.cart_str;
+        $scope.hcart_str = $scope.cartToString();
+        localStorage[$scope.cart_name] = $scope.hcart_str;
         $scope.refresh();
     }
     
@@ -137,7 +138,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
         $scope.item_count_area = document.getElementById("item_count")
         $scope.cart_link = document.getElementById("cart_link");
         $scope.checkout_link = document.getElementById("checkout_link");
-        $scope.num_items = getNumItems();
+        $scope.num_items = $scope.getNumItems();
 
         // draw cart if on cart page
         if ($scope.cart_area != null) $scope.cart_area.innerHTML = $scope.cartToTable();
@@ -164,7 +165,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
             $scope.count += $scope.products[i].getQuantity();
         }
 
-        return count;
+        return $scope.count;
     }
     
     $scope.emptyCart = function() {
@@ -259,7 +260,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
     }
     
     $scope.cartToString = function() {
-        $scope.cart_str ="";
+        $scope.cart_str = "";
 
         for (var i=0; i<$scope.products.length; i++)
         {
@@ -271,7 +272,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
             }
         }
 
-        $scope.cart_str = $scope.cart_str.substring(0,cart_str.length-1);
+        $scope.cart_str = $scope.cart_str.substring(0,$scope.cart_str.length-1);
 
         return $scope.cart_str;
     }
@@ -311,18 +312,18 @@ function Product(id,name,price)
     this.quantity = 0;
     
     // setters
-    this.setQuantity = function(n) { quantity = n };
+    this.setQuantity = function(n) { this.quantity = n };
     
     // getters
-    this.getId = function() { return id; };
-    this.getName = function() { return name; };
-    this.getPrice = function() { return price; };
-    this.getQuantity = function() { return quantity; };
-    this.getExtendedPrice = function() { return quantity * price; };
+    this.getId = function() { return this.id; };
+    this.getName = function() { return this.name; };
+    this.getPrice = function() { return this.price; };
+    this.getQuantity = function() { return this.quantity; };
+    this.getExtendedPrice = function() { return this.quantity * this.price; };
     
     // for testing only
     this.toString = function()
     {
-        return id + "|" + name + "|" + price + "|" + quantity + "|" + this.getExtendedPrice();
+        return this.id + "|" + this.name + "|" + this.price + "|" + this.quantity + "|" + this.getExtendedPrice();
     }
 }
