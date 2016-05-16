@@ -100,18 +100,19 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
             {
                 $scope.addIt = confirm("The item \"" + $scope.name + "\" is already in your cart. Would you like to add another?");
             }
+            
+            if ($scope.addIt)
+            {
+                $scope.products[$scope.index].setQuantity($scope.quantity + 1);
+                $scope.writeCart();
+            }
+            
         }
         else
         {
             alert("Error: Invalid product ID");
         }
-
-        if ($scope.addIt)
-        {
-            $scope.products[$scope.index].setQuantity($scope.quantity + 1);
-            $scope.writeCart();
-        }
-
+        
         $scope.refresh();
     }
     
@@ -134,8 +135,8 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
     }
     
     $scope.refresh = function() {
-        $scope.cart_area = document.getElementById("cart")
-        $scope.item_count_area = document.getElementById("item_count")
+        $scope.cart_area = document.getElementById("cart");
+        $scope.item_count_area = document.getElementById("item_count");
         $scope.cart_link = document.getElementById("cart_link");
         $scope.checkout_link = document.getElementById("checkout_link");
         $scope.num_items = $scope.getNumItems();
@@ -152,9 +153,13 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
 
         if ($scope.checkout_link != null)
         {
-            if ($scope.num_items==0) $scope.checkout_link.href = cart_url;
-            else              $scope.checkout_link.href = checkout_url;
-        }
+            if ($scope.num_items==0) {
+                $scope.checkout_link.href = $scope.cart_url;
+            } else {
+                $scope.checkout_link.href = $scope.checkout_url;
+            }
+        } 
+        
     }
     
     $scope.getNumItems = function() {
@@ -271,7 +276,7 @@ app.controller('storeCtrl', function($scope, $mdDialog, $log, $http) {
                 $scope.cart_str += $scope.products[i].getId() + "|";
             }
         }
-
+        $log.debug($scope.products);
         $scope.cart_str = $scope.cart_str.substring(0,$scope.cart_str.length-1);
 
         return $scope.cart_str;
