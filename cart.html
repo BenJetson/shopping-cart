@@ -6,5 +6,10 @@ onload: "loadCart();"
 ---
 
 <h2 class="page-heading">Cart</h2>
-
-<div onload="loadCart();" id="cart"></div>
+<div ng-controller="storeCtrl">
+    <div onload="loadCart();" id="cart"></div>
+    <div layout="row">
+        <md-button ng-click="updateCart();">Update</md-button>
+        <md-button class="md-primary" ng-href="checkout.html">Checkout</md-button>
+    </div>
+</div>

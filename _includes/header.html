@@ -14,10 +14,10 @@
             <span flex></span>
             
             <md-button class="md-raised" ng-href="cart.html">
-                <div id="cart_links" layout="row">
+                <div id="cart_links" layout="row" ng-controller="cartCtrl">
                     <md-icon class="material-icons">shopping_cart</md-icon>
                     <!--<span class="cart_link">YOUR CART</span>-->
-                    <div class="item_count">&nbsp;<span id="item_count">0</span> items</div>
+                    <div class="item_count">&nbsp;<span ng-bind="cartItemCount">0</span> items</div>
                 </div>
             </md-button>
             

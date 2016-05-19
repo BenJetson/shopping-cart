@@ -6,7 +6,7 @@ storeCategory: accessories
 ---
 
 <h1 class="page-heading">Category Page</h1>
-<div id="productBay" ng-controller="storeCtrl">
+<div id="productBay" ng-controller="cartCtrl">
     {% for item in site.data.products %}
     <md-card>
         <md-card-content>
@@ -21,7 +21,7 @@ storeCategory: accessories
                 <div flex=20 layout="column" layout-align="end center">
                     <h2>${{item.price}}</h2>
                     <span flex></span>
-                    <div ng-controller="storeCtrl">
+                    <div ng-controller="cartCtrl">
                         <md-button class="md-primary" ng-click="addToCart('{{item.itemID}}')">Add to cart</md-button>
                     </div>
                 </div>

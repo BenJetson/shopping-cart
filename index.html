@@ -7,8 +7,8 @@ needsCarousel: true
 
 <h1 class="page-heading">Home</h1>
 
-<div layout="row" style="max-width: 100%;overflow: clip;">
-    <md-card>
+<div layout="row">
+    <md-card flex=100>
         <md-card-content>
             <img src="https://dummyimage.com/1000x350/dadada/000caf.png&text=carousel+here">
 <!--
@@ -25,78 +25,24 @@ needsCarousel: true
     </md-card>
 </div>
 
-<div ng-controller="storeCtrl"></div>
+<!--<div ng-controller="storeCtrl"></div>-->
 
-<div layout-gt-sm="row">
-    <md-card flex=33>
-        <img ng-src="https://dummyimage.com/400x200/fdc/000.png">
-        <md-card-title>
-            <md-card-title-text>
-                <h2>Category 1</h2>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <p>Bla bla bla</p>
-        </md-card-content>
-    </md-card>
-    <md-card flex=33>
-        <img ng-src="https://dummyimage.com/400x200/ff9/000.png">
-        <md-card-title>
-            <md-card-title-text>
-                <h2>Category 2</h2>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <p>Bla bla bla</p>
-        </md-card-content>
-    </md-card>
-    <md-card flex=33>
-        <img ng-src="https://dummyimage.com/400x200/cdf/000.png">
-        <md-card-title>
-            <md-card-title-text>
-                <h2>Category 3</h2>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <p>Bla bla bla</p>
-        </md-card-content>
-    </md-card>
-</div>
-
-<div layout-gt-sm="row">
-    <md-card flex=33>
-        <img ng-src="https://dummyimage.com/400x200/fe7/000.png">
-        <md-card-title>
-            <md-card-title-text>
-                <h2>Category 4</h2>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <p>Bla bla bla</p>
-        </md-card-content>
-    </md-card>
-    <md-card flex=33>
-        <img ng-src="https://dummyimage.com/400x200/dbf/000.png">
-        <md-card-title>
-            <md-card-title-text>
-                <h2>Category 5</h2>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <p>Bla bla bla</p>
-        </md-card-content>
-    </md-card>
-    <md-card flex=33>
-        <img ng-src="https://dummyimage.com/400x200/efb/000.png">
-        <md-card-title>
-            <md-card-title-text>
-                <h2>Category 6</h2>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <p>Bla bla bla</p>
-        </md-card-content>
-    </md-card>
+<div layout-gt-sm="row" layout-wrap>
+    {% for category in site.data.categories %}
+        <div flex=33>
+            <md-card ng-href="{{ category.href | prepend: site.url }}">
+                <img ng-src="{{ category.img | prepend: '/' | prepend: category.dir | prepend: 'img/products/' | prepend: site.url }}">
+                <md-card-title>
+                    <md-card-title-text>
+                        <h2>{{category.prettyTitle}}</h2>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <p>{{category.desc}}</p>
+                </md-card-content>
+            </md-card>
+        </div>
+    {% endfor %}
 </div>
 
 
