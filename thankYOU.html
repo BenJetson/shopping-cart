@@ -1,0 +1,39 @@
+---
+layout: default
+title: Thanks!
+titleInTab: true
+---
+
+<h2 class="page-heading">Thanks for your order!</h2>
+
+<p>We'll be processing your order soon and your order will be shipped in <span id="randomDays"></span> business days.</p>
+
+<script>
+    timer = setInterval(changeShip, 1000);
+    
+    function zeroPadString(number) {
+        if (0 <= number < 100) {
+            return String("000" + number.toString()).slice(-3);
+        } else if (-100 < number < 0) {
+            return "-" + String("000" + Math.abs(number).toString()).slice(-3);
+        } else {
+            return number
+        }
+    }
+    
+    function changeShip() {
+        dayCounter = document.getElementById('randomDays');
+        
+        dayCounter.innerHTML = zeroPadString(Math.ceil(Math.random() * 220 * (1 + Math.random())));
+        dayCounter.style.fontWeight = "bolder";
+        dayCounter.style.color = "#f00";
+        dayCounter.style.fontSize = "+30px";
+        setTimeout(function() {
+            dayCounter.style.fontWeight = "normal";
+            dayCounter.style.color = "inherit";
+            dayCounter.style.fontSize = "inherit";
+        }, 400);
+    }
+    
+    changeShip();
+</script>

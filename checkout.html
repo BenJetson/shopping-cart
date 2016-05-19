@@ -6,11 +6,11 @@ layout: default
 
 <h2 class="page-heading">Checkout</h2>
 
-<div ng-controller="storeCtrl">
+<div ng-controller="cartCtrl">
     <div onload="loadCart();"></div>
 </div>
 <div layout-padding>
-    <form name="checkoutForm">
+    <form name="checkoutForm" method="post" action="thankYOU.html">
         <div layout="column" layout-gt-sm="row" layout-wrap>
             <md-input-container flex=10>
                 <label>Title</label>
@@ -42,9 +42,25 @@ layout: default
             </md-input-container>
             <md-input-container flex=20>
                 <label>ZIP Code</label>
-                <input name="zip" required>
+                <input name="zip" pattern="(\d{5}([\-]\d{4})?)" required>
+            </md-input-container>
+            <md-input-container flex=100>
+                <label>Email Address</label>
+                <input name="email" type="email" required>
+            </md-input-container>
+            <md-input-container flex=60>
+                <label>Card Number</label>
+                <input name="cardno" pattern="[0-9]{13,16}" required>
+            </md-input-container>
+            <md-input-container flex=5>
+                <label>CV #</label>
+                <input name="cardcv" pattern="[0-9]{3}" required>
+            </md-input-container>
+            <md-input-container flex=15>
+                <label>Expiration</label>
+                <input name="cardexp" required>
             </md-input-container>
         </div>
-        <md-button class="md-primary">Submit</md-button>
+        <md-button type="submit" class="md-primary">Submit</md-button>
     </form>
 </div>

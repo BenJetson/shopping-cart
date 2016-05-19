@@ -36,8 +36,8 @@ app.controller("cartCtrl", function ($scope, $rootScope, $log, $mdDialog, $log, 
         
         for (var p = 0; p < $scope.productsAsJSON.length; p++) {
             $rootScope.products.push(new Product($scope.productsAsJSON[p]['itemID'], 
-                                             $scope.productsAsJSON[p]['itemname'], 
-                                             $scope.productsAsJSON[p]['price']));
+                                                 $scope.productsAsJSON[p]['itemname'], 
+                                                 $scope.productsAsJSON[p]['price']));
         }
         
         $scope.loadCart();
@@ -133,11 +133,16 @@ app.controller("cartCtrl", function ($scope, $rootScope, $log, $mdDialog, $log, 
     }
     
     $scope.getNumItems = function () {
-//        $scope.itemTempCounter = 0
-//        for (var c=0; c < $rootScope.products.length; c++) {
-//            $scope.itemTempCounter += $rootScope.products[c].getQuantity();
+        $scope.itemTempCounter = 0
+        for (var c=0; c < $rootScope.products.length; c++) {
+            $scope.itemTempCounter += $rootScope.products[c].getQuantity();
+        }
+        return $scope.itemTempCounter;
+//        if (localStorage[$scope.cart_name].split("|") != undefined) {
+//            return localStorage[$scope.cart_name].split("|").length;
+//        } else {
+//            return 0;
 //        }
-        return localStorage[$scope.cart_name].split("|").length;
     }
     
     $scope.emptyCart = function () {
