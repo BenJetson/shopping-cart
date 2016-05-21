@@ -6,102 +6,45 @@ function Product(id, name, price) {
     this.quantity = 0;
     
     // setters
-    this.setQuantity = function (n) { this.quantity = n; };
+    this.setQuantity = function(n) { this.quantity = n; };
     
     // getters
-    this.getId = function () { return this.id; };
-    this.getName = function () { return this.name; };
-    this.getPrice = function () { return this.price; };
-    this.getQuantity = function () { return this.quantity; };
-    this.getExtendedPrice = function () { return this.quantity * this.price; };
-    this.bumpQuantity = function () { this.quantity++; };
+    this.getId = function() { return this.id; };
+    this.getName = function() { return this.name; };
+    this.getPrice = function() { return this.price; };
+    this.getQuantity = function() { return this.quantity; };
+    this.getExtendedPrice = function() { return this.quantity * this.price; };
+    this.bumpQuantity = function() { this.quantity++; };
     
     // for testing only
-    this.toString = function () {
+    this.toString = function() {
         return this.id + "|" + this.name + "|" + this.price + "|" + this.quantity + "|" + this.getExtendedPrice();
-    }
-}
+    };
+};
 
-app.controller("cartCtrl", function ($scope, $rootScope, $log, $mdDialog, $log, $http) {
-   
-    $rootScope.products = [];
-//    $scope.cartItemCount = 0;
+app.factory('productHandler', ['$http', function($http) {
+    var products = {};
     
-    $http({
-        method: "GET",
-        url: "/products.json"
-    }).then(function (response) {
-        
-        $scope.productsAsJSON = response.data;
-        
-        for (var p = 0; p < $scope.productsAsJSON.length; p++) {
-            $rootScope.products.push(new Product($scope.productsAsJSON[p]['itemID'], 
-                                                 $scope.productsAsJSON[p]['itemname'], 
-                                                 $scope.productsAsJSON[p]['price']));
-        }
-        
-        $scope.loadCart();
-        
-    });
+    products.list = [];
     
-    $scope.sales_tax_rate = 0.06;
-    $scope.free_shipping = false;
-    $scope.shipping_rate = 6.99;
-    $scope.cart_name = "bgparts_cart";
-    
-    $scope.loadCart = function () {
-        $scope.loadedCart = localStorage[$scope.cart_name];
-        
-        if ($scope.loadedCart != null && $scope.loadedCart.length != 0) {
-            
-            $scope.loadedItemIDs = $scope.loadedCart.split("|");
-            
-            for (var k=0; k < $scope.loadedItemIDs.length; k++) {
-                $scope.loadedIndex = $scope.search($scope.loadedItemIDs[k]);
-                
-                if ($scope.loadedIndex > -1) {
-                    $rootScope.products[$scope.loadedIndex].bumpQuantity();
-                }
+    products.load = function() {
+        $http({
+            method: "GET",
+            url: "/products.json"
+        }).then(function(response) {
+            for (var p = 0; p < response.data.length; p++) {
+                products.list.push(new Product(response.data[p]['itemID'], 
+                                               response.data[p]['itemname'], 
+                                               response.data[p]['price']));
             }
-        }
-            
-        $scope.refresh();
-            
+        });
     }
     
-    $scope.addToCart = function (idToAdd) {
-        $scope.indexToAdd = $scope.search(idToAdd);
-        $scope.shouldAddItem = false;
+    products.find = function(id) {
+        id = id.toLowerCase();
         
-        if ($scope.indexToAdd > -1) {
-            if ($rootScope.products[$scope.indexToAdd].getQuantity() == 0) {
-                alert("The following item was added to your cart: " + $rootScope.products[$scope.indexToAdd].getName());
-                $scope.shouldAddItem = true;
-            } else {
-                $scope.shouldAddItem = confirm("The item " + $rootScope.products[$scope.indexToAdd].getName() + 
-                                               " is already in your cart. Do you want to add another?")
-            }
-
-            if ($scope.shouldAddItem) {
-                $rootScope.products[$scope.indexToAdd].bumpQuantity();
-                $scope.writeCart();
-            }
-        } else {
-            alert("We've encountered an error, but it's not your fault. The developer of this site " +
-                  "has provided an invalid product ID. Nag the site owner with an email.")
-        }
-        
-        $scope.refresh();
-        
-    }
-    
-    $scope.search = function (id) {
-        $scope.searchID = id.toLowerCase();
-        
-        for (var s=0; s<$rootScope.products.length; s++) {
-            $scope.searchThisID = $rootScope.products[s].getId().toLowerCase();
-            
-            if ($scope.searchID == $scope.searchThisID) {
+        for (var s=0; s<products.list.length; s++) {
+            if (id == products.list[s].getId().toLowerCase()) {
                 return s;
             }
         }
@@ -109,49 +52,103 @@ app.controller("cartCtrl", function ($scope, $rootScope, $log, $mdDialog, $log, 
         return -1;
     }
     
-    $scope.cartToString = function () {
-        $scope.tempCartStrItems = [];
-        
-//        $log.debug($rootScope.products);
-        
-        for (var i=0; i<$rootScope.products.length; i++) {
-            
-//            $log.debug($rootScope.products[i].getId() + " | q: "+ $rootScope.products[i].getQuantity().toString());
-            
-            for (var j=0; j<$rootScope.products[i].getQuantity(); j++) {
-                $scope.tempCartStrItems.push($rootScope.products[i].getId());
+    products.quantity = {};
+    products.quantity.bump = function(index) {
+        products.list[index].bumpQuantity();
+    }
+    products.quantity.set = function(index, quantity) {
+        products.list[index].setQuantity(quantity);
+    }
+    products.quantity.clear = function(index) {
+        products.list[index].setQuantity(0);
+    }
+    
+    products.get = function(id) {
+        return products.list[id];
+    }
+    
+    return products;
+}]);
+
+app.provider('cartProvider', function() {
+    // Configuration
+    this.cartURL = 'cart.html';
+    this.homeURL = 'index.html';
+    this.salesTaxRate = 0.06;
+    this.freeShipping = false;
+    this.shippingRate = 8.99;
+    this.cartName = "cart";
+    
+    // Functions available to controllers
+    this.$get = ['notifyService', 'productHandler', function(notifyService, productHandler) {
+        return {
+            load: function() {
+                var cartFromStorage = localStorage[this.cartName].split("|");
+                
+                if (cartFromStorage != null && cartFromStorage.length != 0) {
+                    for (var k=0; k < cartFromStorage.length; k++) {
+                        var loadedIndex = productHandler.find(cartFromStorage[k]);
+                        
+                        if (loadedIndex > -1) {
+                            productHandler.quantity.bump(loadedIndex);
+                        }
+                    }
+                }
+            },
+            add: function(id) {
+                id = productHandler.find(id);
+                var shouldAddIt = false;
+                
+                if (id > -1) {
+                    if (products.quantity.get(id) == 0) {
+                        notifyService.alert("The item" + productHandler.list[id].getName() + "has been added to your cart.")
+                        shouldAddIt = true;
+                    } else {
+                        shouldAddIt = notifyService.confirm("The item" + productHandler.list[id].getName() + "is already " +
+                                                            "in your cart. Add another?");
+                    }
+                    
+                    if (shouldAddIt) {
+                        productHandler.quantity.bump(id);
+                    }
+                } else {
+                    notifyService.alert("Whoops! This site has encountered an error. Don't worry: it's not your fault. " +
+                                        "The developer of this site has made an error when programming item IDs.")
+                }
+            },
+            clear: function() {
+                localStorage.removeItem(this.cartName);
+                window.location.reload();
+            },
+            toString: function() {
+                var tempCartStrItems = []
+                
+                for (var i=0; i<productHandler.list.length; i++) {
+                    for (var j=0; j<productHandler.quantity.get(i); j++) {
+                        tempCartStrItems.push(productHandler.list[i].getId());
+                    }
+                }
+                
+                return tempCartStrItems.join("|");
+            },
+            write: function() {
+                localStorage[this.cartName] = this.toString();
+            },
+            getNumItems: function() {
+                var  itemTempCounter = 0
+                for (var c=0; c < productHandler.list.length; c++) {
+                    itemTempCounter += productHandler.quantity.get(c);
+                }
+                return itemTempCounter;
             }
-            
         }
-        
-        return $scope.tempCartStrItems.join("|");
-    }
-    
-    $scope.writeCart = function () {
-        localStorage[$scope.cart_name] = $scope.cartToString();
-        $scope.refresh();
-    }
-    
-    $scope.getNumItems = function () {
-        $scope.itemTempCounter = 0
-        for (var c=0; c < $rootScope.products.length; c++) {
-            $scope.itemTempCounter += $rootScope.products[c].getQuantity();
-        }
-        return $scope.itemTempCounter;
-//        if (localStorage[$scope.cart_name].split("|") != undefined) {
-//            return localStorage[$scope.cart_name].split("|").length;
-//        } else {
-//            return 0;
-//        }
-    }
-    
-    $scope.emptyCart = function () {
-        localStorage.removeItem($scope.cart_name);;
-        $scope.refresh();
-    }
-    
-    $scope.refresh = function () {
-        $scope.cartItemCount = $scope.getNumItems();
-    }
-    
+    }];
 });
+
+app.controller("cartCtrl", ['$scope', 'cartProvider', 'productHandler', function($scope, cartProvider, productHandler) {
+   
+    $scope.cartAdd = function(id) {
+        cartProvider.add(id);
+    }
+    
+}]);

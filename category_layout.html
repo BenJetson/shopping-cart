@@ -22,7 +22,7 @@ storeCategory: accessories
                     <h2>${{item.price}}</h2>
                     <span flex></span>
                     <div ng-controller="cartCtrl">
-                        <md-button class="md-primary" ng-click="addToCart('{{item.itemID}}')">Add to cart</md-button>
+                        <md-button class="md-primary" ng-click="cartAdd('{{item.itemID}}')">Add to cart</md-button>
                     </div>
                 </div>
             </div>

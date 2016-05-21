@@ -1,28 +1,5 @@
 var app = angular.module('shoppingCart', ['ngMaterial']);
 
-app.controller('mainCtrl', function($scope, $log, $mdMedia, $mdSidenav, alertHandler) {
-    $log.info("Controller loaded.");
-    
-    $scope.toggleNav = function(){
-            $mdSidenav('left').toggle();
-    };
-    
-});
-
-app.service('alertHandler', function($mdDialog) {
-    return {
-        show: function(alertBody, alertTitle, buttonText) {
-            $mdDialog.show(
-                $mdDialog.alert({
-                    title: alertTitle,
-                    textContent: alertBody,
-                    ok: buttonText
-                })
-            );
-        }
-    }
-});
-
 app.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
     .primaryPalette('green')
@@ -35,56 +12,33 @@ app.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
 });
 
-app.controller('formCtrl', function($scope, $log) {
-    $scope.states = ['AL',
-                    'AK',
-                    'AZ',
-                    'AR',
-                    'CA',
-                    'CO',
-                    'CT',
-                    'DE',
-                    'FL',
-                    'GA',
-                    'HI',
-                    'ID',
-                    'IL',
-                    'IN',
-                    'IA',
-                    'KS',
-                    'KY',
-                    'LA',
-                    'ME',
-                    'MD',
-                    'MA',
-                    'MI',
-                    'MN',
-                    'MS',
-                    'MO',
-                    'MT',
-                    'NE',
-                    'NV',
-                    'NH',
-                    'NJ',
-                    'NM',
-                    'NY',
-                    'NC',
-                    'ND',
-                    'OH',
-                    'OK',
-                    'OR',
-                    'PA',
-                    'RI',
-                    'SC',
-                    'SD',
-                    'TN',
-                    'TX',
-                    'UT',
-                    'VT',
-                    'VA',
-                    'WA',
-                    'WV',
-                    'WI',
-                    'WY'];
+app.factory('notifyService', ['$mdDialog', function($mdDialog) {
+    return {
+        alert: function(alertText, alertTitle="", buttonText="Close") {
+            $mdDialog.show(
+                $mdDialog.alert({
+                    title: alertTitle,
+                    textContent: alertText,
+                    ok: buttonText
+                })
+            );
+        },
+        confirm: function(alertText, alertTitle="") {
+            $mdDialog.show(
+                $mdDialog.confirm({
+                    title: alertTitle,
+                    textContent: alertText,
+                    clickOutsideToClose: false
+                })
+            ).then(function() { return true; }).then(function() { return false; });
+        }
+    }
+}]);
+
+app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', function($scope, $log, $mdMedia, $mdSidenav) {
+    $log.info("Controller loaded.");
     
-})
+    $scope.toggleNav = function(){
+            $mdSidenav('left').toggle();
+    };
+}]);
