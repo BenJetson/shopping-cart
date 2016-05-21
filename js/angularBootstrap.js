@@ -12,25 +12,30 @@ app.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
 });
 
-app.factory('notifyService', ['$mdDialog', function($mdDialog) {
+app.factory('notifyService', ['$mdDialog', '$log', function($mdDialog, $log) {
     return {
         alert: function(alertText, alertTitle="", buttonText="Close") {
             $mdDialog.show(
                 $mdDialog.alert({
                     title: alertTitle,
                     textContent: alertText,
-                    ok: buttonText
+                    ok: buttonText,
+                    ariaLabel: alertTitle
                 })
             );
         },
-        confirm: function(alertText, alertTitle="") {
-            $mdDialog.show(
+        confirm: function(alertText, alertTitle="", okText="OK", cancelText="Cancel") {
+            $log.debug("asdf!");
+            return $mdDialog.show(
                 $mdDialog.confirm({
                     title: alertTitle,
                     textContent: alertText,
-                    clickOutsideToClose: false
+                    ok: okText,
+                    cancel: cancelText,
+                    clickOutsideToClose: false,
+                    ariaLabel: alertTitle
                 })
-            ).then(function() { return true; }).then(function() { return false; });
+            ).then(function() { $log.debug("QWERTY!");return true; }, function() { $log.debug("ZXCVBNM!");return false; });
         }
     }
 }]);

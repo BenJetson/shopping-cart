@@ -22,7 +22,7 @@ function Product(id, name, price) {
     };
 };
 
-app.factory('productHandler', ['$http', function($http) {
+app.factory('productHandler', ['$http', '$log', function($http, $log) {
     var products = {};
     
     products.list = [];
@@ -48,22 +48,27 @@ app.factory('productHandler', ['$http', function($http) {
                 return s;
             }
         }
-        
+        $log.error("Product ID '" + id + "' was not found!")
         return -1;
     }
     
-    products.quantity = {};
-    products.quantity.bump = function(index) {
-        products.list[index].bumpQuantity();
-    }
-    products.quantity.set = function(index, quantity) {
-        products.list[index].setQuantity(quantity);
-    }
-    products.quantity.clear = function(index) {
-        products.list[index].setQuantity(0);
-    }
+    products.quantity = {
+        bump: function(index) {
+            products.list[index].bumpQuantity();
+        },
+        set: function(index, quantity) {
+            products.list[index].setQuantity(quantity);
+        },
+        clear: function(index) {
+            products.list[index].setQuantity(0);
+        },
+        get: function(index) {
+            return products.list[index].getQuantity();
+        }
+        
+    };
     
-    products.get = function(id) {
+    products.getItem = function(id) {
         return products.list[id];
     }
     
@@ -80,8 +85,8 @@ app.provider('cartProvider', function() {
     this.cartName = "cart";
     
     // Functions available to controllers
-    this.$get = ['notifyService', 'productHandler', function(notifyService, productHandler) {
-        return {
+    this.$get = ['notifyService', 'productHandler', '$log', function(notifyService, productHandler, $log) {
+        var cartPVDR = {
             load: function() {
                 var cartFromStorage = localStorage[this.cartName].split("|");
                 
@@ -95,26 +100,30 @@ app.provider('cartProvider', function() {
                     }
                 }
             },
-            add: function(id) {
+            requestAdd: function(id) {
                 id = productHandler.find(id);
-                var shouldAddIt = false;
                 
                 if (id > -1) {
-                    if (products.quantity.get(id) == 0) {
-                        notifyService.alert("The item" + productHandler.list[id].getName() + "has been added to your cart.")
-                        shouldAddIt = true;
+                    if (productHandler.quantity.get(id) == 0) {
+                        notifyService.alert("The item '" + productHandler.list[id].getName() + "' has been added to your cart.");
+                        this.add(id);
                     } else {
-                        shouldAddIt = notifyService.confirm("The item" + productHandler.list[id].getName() + "is already " +
-                                                            "in your cart. Add another?");
-                    }
-                    
-                    if (shouldAddIt) {
-                        productHandler.quantity.bump(id);
+                        notifyService.confirm("The item '" + productHandler.list[id].getName() + "' is already " +
+                                              "in your cart. Are you sure you want to add another?", "Ad",
+                                              "Yes", "No").then(function(userInput) {
+                            if (userInput) {
+                                cartPVDR.add(id);
+                            }
+                        });
                     }
                 } else {
                     notifyService.alert("Whoops! This site has encountered an error. Don't worry: it's not your fault. " +
-                                        "The developer of this site has made an error when programming item IDs.")
+                                        "The developer of this site has made an error when programming item IDs.", "Error");
                 }
+            },
+            add: function(id) {
+                productHandler.quantity.bump(id);
+                this.write();
             },
             clear: function() {
                 localStorage.removeItem(this.cartName);
@@ -142,13 +151,17 @@ app.provider('cartProvider', function() {
                 return itemTempCounter;
             }
         }
+        
+        return cartPVDR;
     }];
 });
 
 app.controller("cartCtrl", ['$scope', 'cartProvider', 'productHandler', function($scope, cartProvider, productHandler) {
-   
+    
+    productHandler.load();
+    
     $scope.cartAdd = function(id) {
-        cartProvider.add(id);
+        cartProvider.requestAdd(id);
     }
     
 }]);
