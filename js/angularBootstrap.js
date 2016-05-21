@@ -12,7 +12,7 @@ app.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']]');
 });
 
-app.factory('notifyService', ['$mdDialog', '$log', function($mdDialog, $log) {
+app.factory('notifyService', ['$mdDialog', function($mdDialog) {
     return {
         alert: function(alertText, alertTitle="", buttonText="Close") {
             $mdDialog.show(
@@ -25,7 +25,6 @@ app.factory('notifyService', ['$mdDialog', '$log', function($mdDialog, $log) {
             );
         },
         confirm: function(alertText, alertTitle="", okText="OK", cancelText="Cancel") {
-            $log.debug("asdf!");
             return $mdDialog.show(
                 $mdDialog.confirm({
                     title: alertTitle,
@@ -35,13 +34,13 @@ app.factory('notifyService', ['$mdDialog', '$log', function($mdDialog, $log) {
                     clickOutsideToClose: false,
                     ariaLabel: alertTitle
                 })
-            ).then(function() { $log.debug("QWERTY!");return true; }, function() { $log.debug("ZXCVBNM!");return false; });
+            ).then(function() { return true; }, function() { return false; });
         }
     }
 }]);
 
 app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', function($scope, $log, $mdMedia, $mdSidenav) {
-    $log.info("Controller loaded.");
+    $log.info("Controller loaded!");
     
     $scope.toggleNav = function(){
             $mdSidenav('left').toggle();

@@ -22,12 +22,24 @@ function Product(id, name, price) {
     };
 };
 
-app.factory('productHandler', ['$http', '$log', function($http, $log) {
+app.factory('productHandler', ['$http', '$log', '$rootScope', function($http, $log, $rootScope) {
+    
+    $rootScope.itemCount = 0;
+    
     var products = {};
     
+    products.counter = function() {
+        var itemTempCounter = 0;
+        for (var c=0; c < products.list.length; c++) {
+            itemTempCounter += products.quantity.get(c);
+        }
+        
+        $rootScope.itemCount = itemTempCounter;
+    };
+                               
     products.list = [];
     
-    products.load = function() {
+    products.loadServerDB = function() {
         $http({
             method: "GET",
             url: "/products.json"
@@ -37,8 +49,27 @@ app.factory('productHandler', ['$http', '$log', function($http, $log) {
                                                response.data[p]['itemname'], 
                                                response.data[p]['price']));
             }
+            
+            products.loadCartFromDisk();
+            
         });
-    }
+    };
+    
+    products.loadCartFromDisk = function() {
+        var cartFromStorage = localStorage["cart"];
+
+        if (cartFromStorage != null && cartFromStorage.length != 0) {
+            cartFromStorage = cartFromStorage.split("|");
+            for (var k=0; k < cartFromStorage.length; k++) {
+                var loadedIndex = products.find(cartFromStorage[k]);
+                if (loadedIndex > -1) {
+                    products.quantity.bump(loadedIndex);
+                }
+            }
+        }
+        
+        products.counter();
+    };
     
     products.find = function(id) {
         id = id.toLowerCase();
@@ -50,7 +81,7 @@ app.factory('productHandler', ['$http', '$log', function($http, $log) {
         }
         $log.error("Product ID '" + id + "' was not found!")
         return -1;
-    }
+    };
     
     products.quantity = {
         bump: function(index) {
@@ -70,9 +101,25 @@ app.factory('productHandler', ['$http', '$log', function($http, $log) {
     
     products.getItem = function(id) {
         return products.list[id];
-    }
+    };
+    
+    products.loadServerDB();
     
     return products;
+}]);
+
+app.service('itemCounterService', ['productHandler', function(productHandler) {
+    return {
+        do: function() {
+            var itemTempCounter = 0
+            for (var c=0; c < productHandler.list.length; c++) {
+                itemTempCounter += productHandler.quantity.get(c);
+            }
+            $log.debug(itemTempCounter);
+
+            return itemTempCounter;
+        }
+    }
 }]);
 
 app.provider('cartProvider', function() {
@@ -82,24 +129,11 @@ app.provider('cartProvider', function() {
     this.salesTaxRate = 0.06;
     this.freeShipping = false;
     this.shippingRate = 8.99;
-    this.cartName = "cart";
+//    this.cartName = "cart"; 
     
     // Functions available to controllers
     this.$get = ['notifyService', 'productHandler', '$log', function(notifyService, productHandler, $log) {
         var cartPVDR = {
-            load: function() {
-                var cartFromStorage = localStorage[this.cartName].split("|");
-                
-                if (cartFromStorage != null && cartFromStorage.length != 0) {
-                    for (var k=0; k < cartFromStorage.length; k++) {
-                        var loadedIndex = productHandler.find(cartFromStorage[k]);
-                        
-                        if (loadedIndex > -1) {
-                            productHandler.quantity.bump(loadedIndex);
-                        }
-                    }
-                }
-            },
             requestAdd: function(id) {
                 id = productHandler.find(id);
                 
@@ -123,10 +157,11 @@ app.provider('cartProvider', function() {
             },
             add: function(id) {
                 productHandler.quantity.bump(id);
+                productHandler.counter();
                 this.write();
             },
             clear: function() {
-                localStorage.removeItem(this.cartName);
+                localStorage.removeItem(cartPVDR.cartName);
                 window.location.reload();
             },
             toString: function() {
@@ -141,14 +176,7 @@ app.provider('cartProvider', function() {
                 return tempCartStrItems.join("|");
             },
             write: function() {
-                localStorage[this.cartName] = this.toString();
-            },
-            getNumItems: function() {
-                var  itemTempCounter = 0
-                for (var c=0; c < productHandler.list.length; c++) {
-                    itemTempCounter += productHandler.quantity.get(c);
-                }
-                return itemTempCounter;
+                localStorage["cart"] = this.toString();
             }
         }
         
@@ -156,12 +184,20 @@ app.provider('cartProvider', function() {
     }];
 });
 
+app.service('cartWidgetService')
+
 app.controller("cartCtrl", ['$scope', 'cartProvider', 'productHandler', function($scope, cartProvider, productHandler) {
     
-    productHandler.load();
+//    $scope.setCounter = function() { 
+//        $scope.numItems = cartProvider.getNumItems(); 
+//    };
+//    
+//    $scope.setCounter();
     
+
     $scope.cartAdd = function(id) {
         cartProvider.requestAdd(id);
+//        $scope.setCounter();
     }
     
 }]);
