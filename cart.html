@@ -7,7 +7,37 @@ onload: "loadCart();"
 
 <h2 class="page-heading">Cart</h2>
 <div ng-controller="cartCtrl">
-    <div onload="loadCart();" id="cart"></div>
+    
+    <md-button ng-click="displayCart();">DISPLAY CART</md-button>
+    
+    <div id="cart">
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="item in $root.cartArray track by $index">
+                <img ng-src="[[item.img]]" class="md-avatar cartItemImg">
+                <div class="md-item-text" layout="column" layout-gt-sm="row" layout-fill>
+                    <div flex=60 layout="column">
+                        <span class="cartItemName">[[item.name]]</span>
+                        <span class="cartItemID">ID: <span class="productID">[[item.id]]</span></span>
+                    </div>
+                    <div flex=40 layout="row" layout-fill>
+                        <div flex=25>
+                            <md-input-container>
+                                <label>Quantity</label>
+                                <input class="productQuantity" data-itemid="[[item.id]]" 
+                                       value="[[item.quantity]]">
+                            </md-input-container>
+                        </div>
+                        <span flex></span>
+                        <div flex=70 layout="row" layout-gt-sm="column">
+                            <span class="cartItemExtPrice">$[[item.extPrice]]</span>&nbsp;
+                            <span class="cartItemPrice">($[[item.price]] each)</span>
+                        </div>
+                    </div>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+    
     <div layout="row">
         <md-button ng-click="updateCart();">Update</md-button>
         <md-button class="md-primary" ng-href="checkout.html">Checkout</md-button>
