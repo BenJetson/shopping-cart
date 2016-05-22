@@ -46,8 +46,8 @@ app.factory('productHandler', ['$http', '$log', '$rootScope', function($http, $l
         
         $http({
             method: "GET",
-//            url: "https://bgodfr5236.github.io/shopping-cart/products.json"
-            url: "http://127.0.0.1:4000/products.json"
+            url: "https://bgodfr5236.github.io/shopping-cart/products.json"
+//            url: "http://127.0.0.1:4000/products.json"
         }).then(function(response) {
             for (var p = 0; p < response.data.length; p++) {
                 products.list.push(new Product(response.data[p]['itemID'], 
