@@ -8,10 +8,7 @@ onload: "loadCart();"
 <h2 class="page-heading">Cart</h2>
 <div ng-controller="cartCtrl">
     
-    <md-button ng-click="displayCart();">DISPLAY CART</md-button>
-    <md-button ng-click="doCounter();">counter</md-button>
-    
-    <div id="cart">
+    <div id="cart" onload="displayCart();">
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="item in $root.cartArray track by $index">
                 <img ng-src="[[item.img]]" class="md-avatar cartItemImg">

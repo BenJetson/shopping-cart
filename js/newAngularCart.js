@@ -12,7 +12,7 @@ function Product(id, name, price, category, img) {
     
     
     // setters
-    this.setQuantity = function(n) { this.quantity = n; };
+    this.setQuantity = function(n) { this.quantity = Math.floor(Number(n)); };
     
     // getters
     this.getId = function() { return this.id; };
@@ -88,6 +88,10 @@ app.factory('productHandler', ['$http', '$log', '$rootScope', function($http, $l
         if (showDebugOutput) { $log.info("Cart load from disk success."); }
         
         products.counter();
+        
+        if (document.getElementById("cart") != null) {
+            products.cartDisplay.setArray();
+        }
     };
     
     products.find = function(id) {
@@ -124,6 +128,48 @@ app.factory('productHandler', ['$http', '$log', '$rootScope', function($http, $l
     products.getItem = function(id) {
         return products.list[id];
     };
+    
+    products.cartDisplay = {
+        setArray: function() {
+            
+            if (showDebugOutput) { $log.info("Setting the cart display!"); }
+            
+            if (products.list.length > 0) {
+                var tempCartArray = [];
+                for (var q=0; q < products.list.length; q++) {
+                    if (products.list[q].getQuantity() > 0) {
+                        tempCartArray.push({
+                            name: products.list[q].getName(),
+                            id: products.list[q].getId(),
+                            quantity: products.list[q].getQuantity(),
+                            price: products.list[q].getPrice(),
+                            extPrice: products.list[q].getExtendedPrice(),
+                            img: siteURL + products.list[q].getImgPath()
+                        });
+                    }
+                }
+                
+                $rootScope.cartArray = tempCartArray;
+                $rootScope.showCart = true;
+                
+            } else {
+                $rootScope.showCart = false;
+            }
+        },
+        update: function() {
+            
+            if (showDebugOutput) { $log.info("Updating the cart from the display!"); }
+            
+            $('#cart input.productQuantity').each(function() {
+                if ($.isNumeric($(this).val()) && $(this).val() >= 0) {
+                    products.quantity.set(products.find($(this).attr("data-itemid")), $(this).val());
+                }
+            });
+            
+            products.cartDisplay.setArray();
+            products.counter();
+        }
+    }
     
     products.loadServerDB();
     
@@ -219,7 +265,7 @@ app.provider('cartProvider', function() {
 app.service("cartInterfaceService",  ['$log', '$rootScope', 'productHandler', 
                                       function($log, $rootScope, productHandler) {
     serviceObject = {
-        setArray: function() {
+        setCartDisplayArray: function() {
             
             var tempCartArray = [];
             
@@ -239,7 +285,7 @@ app.service("cartInterfaceService",  ['$log', '$rootScope', 'productHandler',
             $rootScope.cartArray = tempCartArray;
 //            $rootScope.$apply();
         },
-        updateCart: function() {
+        updateCartFromDisplay: function() {
             $('#cart input.productQuantity').each(function() {
                 if ($.isNumeric($(this).val()) && $(this).val() >= 0) {
                     productHandler.quantity.set(productHandler.find($(this).attr("data-itemid")), $(this).val());
@@ -247,7 +293,7 @@ app.service("cartInterfaceService",  ['$log', '$rootScope', 'productHandler',
             });
             
             serviceObject.setArray();
-//            productHandler.counter();
+            productHandler.counter();
         }
     }
     
@@ -255,30 +301,15 @@ app.service("cartInterfaceService",  ['$log', '$rootScope', 'productHandler',
 }]);
 
 
-app.controller("cartCtrl", ['$scope', '$log', 'cartProvider', 'productHandler', 'cartInterfaceService',
-                            function($scope, $log, cartProvider, productHandler, cartInterfaceService) {
+app.controller("cartCtrl", ['$scope', '$log', 'cartProvider', 'productHandler',
+                            function($scope, $log, cartProvider, productHandler) {
     
     $scope.cartAdd = function(id) {
         cartProvider.requestAdd(id);
     }
     
-//    $scope.cartArray = cartInterfaceService.generateArray();
-//    cartInterfaceService.setArray();
-    
-    $scope.displayCart = function() {
-        if (showDebugOutput) { $log.info("Generating cart array!"); }
-        cartInterfaceService.setArray();
-    }
-    
     $scope.updateCart = function() {
-        cartInterfaceService.updateCart();
-//        productHandler.counter();
+        productHandler.cartDisplay.update();
     }
-    
-    $scope.doCounter = function() {
-        productHandler.counter();
-    }
-    
-//    $scope.cartArray = [productHandler.list[0], productHandler.list[1]];
     
 }]);
