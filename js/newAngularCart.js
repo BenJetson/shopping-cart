@@ -1,3 +1,5 @@
+var showDebugOutput = true;
+
 function Product(id, name, price) {
     // fields set from constructor
     this.id = String(id);
@@ -40,22 +42,28 @@ app.factory('productHandler', ['$http', '$log', '$rootScope', function($http, $l
     products.list = [];
     
     products.loadServerDB = function() {
+        if (showDebugOutput) { $log.info("Loading the product database from the server..."); }
+        
         $http({
             method: "GET",
-            url: "/products.json"
+//            url: "https://bgodfr5236.github.io/shopping-cart/products.json"
+            url: "http://127.0.0.1:4000/products.json"
         }).then(function(response) {
             for (var p = 0; p < response.data.length; p++) {
                 products.list.push(new Product(response.data[p]['itemID'], 
                                                response.data[p]['itemname'], 
                                                response.data[p]['price']));
             }
-            
+            if (showDebugOutput) { $log.info("Product database load from server success."); }
             products.loadCartFromDisk();
             
         });
     };
     
     products.loadCartFromDisk = function() {
+        
+        if (showDebugOutput) { $log.info("Loading the user's cart from disk..."); }
+        
         var cartFromStorage = localStorage["cart"];
 
         if (cartFromStorage != null && cartFromStorage.length != 0) {
@@ -67,6 +75,8 @@ app.factory('productHandler', ['$http', '$log', '$rootScope', function($http, $l
                 }
             }
         }
+        
+        if (showDebugOutput) { $log.info("Cart load from disk success."); }
         
         products.counter();
     };
@@ -122,12 +132,26 @@ app.service('itemCounterService', ['productHandler', function(productHandler) {
     }
 }]);
 
+app.config(['cartProvider', function(cartProvider) {
+    cartProvider.prependURL = "https://bgodfr5236.github.io/shopping-cart/";
+//    cartProvider.prependURL = "http://127.0.0.1:4000/";
+    cartProvider.cartURL = "cart.html";
+    cartProvider.homeURL = "index.html";
+    cartProvider.salesTaxRate = 0.06;
+    cartProvider.freeShipping = false;
+    cartProvider.freeShippingMin = 49.00;
+    cartProvider.shippingRate = 7.95;
+    cartProvider.cartName = "bgparts_cart";
+}]);
+
 app.provider('cartProvider', function() {
     // Configuration
+    this.prependURL = "http://0.0.0.0/"
     this.cartURL = 'cart.html';
     this.homeURL = 'index.html';
     this.salesTaxRate = 0.06;
-    this.freeShipping = false;
+    this.freeShipping = true;
+    this.freeShippingMin = 29.99;
     this.shippingRate = 8.99;
 //    this.cartName = "cart"; 
     
@@ -183,8 +207,6 @@ app.provider('cartProvider', function() {
         return cartPVDR;
     }];
 });
-
-app.service('cartWidgetService')
 
 app.controller("cartCtrl", ['$scope', 'cartProvider', 'productHandler', function($scope, cartProvider, productHandler) {
     
