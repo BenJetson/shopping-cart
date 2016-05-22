@@ -7,7 +7,7 @@ layout: default
 <h2 class="page-heading">Checkout</h2>
 
 <div layout-padding ng-controller="cartCtrl">
-    <form name="checkoutForm" action="checkoutComplete();" method="get">
+    <form name="checkoutForm" ng-submit="checkoutComplete();" method="get">
         <div layout="column" layout-gt-sm="row" layout-wrap>
             <md-input-container flex=10>
                 <label>Title</label>
