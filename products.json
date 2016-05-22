@@ -203,42 +203,42 @@
       "category": "gpus"
    },
    {  
-      "itemID": "moth0029",
+      "itemID": "mbd0029",
       "price": 89.75,
       "itemname": "ASUS M4A78T ATX Motherboard (AM3+ Socket)",
       "img": "asus_m4a78t_am3+_atx.jpg",
       "category": "motherboards"
    },
    {  
-      "itemID": "moth0030",
+      "itemID": "mbd0030",
       "price": 79.64,
       "itemname": "ASUS M5A97 ATX Motherboard (AM3+ Socket)",
       "img": "asus_m5a97-r2.0_am3+_atx.jpg",
       "category": "motherboards"
    },
    {  
-      "itemID": "moth0031",
+      "itemID": "mbd0031",
       "price": 110.87,
       "itemname": "Gigabyte GA-G1 ATX Motherboard (LGA 1151 Socket)",
       "img": "gigabyte_ga-g1_lga1151_atx.jpg",
       "category": "motherboards"
    },
    {  
-      "itemID": "moth0032",
+      "itemID": "mbd0032",
       "price": 74.56,
       "itemname": "Gigabyte GA-Z170X ATX Motherboard (LGA 1151 Socket)",
       "img": "gigabyte_ga-z170x_lga1151_atx.jpg",
       "category": "motherboards"
    },
    {  
-      "itemID": "moth0033",
+      "itemID": "mbd0033",
       "price": 98.12,
       "itemname": "MSI 970 ATX Motherboard (AM3+ Socket)",
       "img": "msi_970_am3+_atx.jpg",
       "category": "motherboards"
    },
    {  
-      "itemID": "moth0034",
+      "itemID": "mbd0034",
       "price": 94.62,
       "itemname": "MSI Z170A ATX Motherboard LGA 1151 Socket",
       "img": "msi_z170a_lga1151_atx.jpg",

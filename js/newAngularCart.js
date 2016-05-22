@@ -105,12 +105,15 @@ app.factory('productHandler', ['$http', '$log', '$rootScope', function($http, $l
     products.quantity = {
         bump: function(index) {
             products.list[index].bumpQuantity();
+//            products.counter();
         },
         set: function(index, quantity) {
             products.list[index].setQuantity(quantity);
+//            products.counter();
         },
         clear: function(index) {
             products.list[index].setQuantity(0);
+//            products.counter();
         },
         get: function(index) {
             return products.list[index].getQuantity();
@@ -215,13 +218,12 @@ app.provider('cartProvider', function() {
 
 app.service("cartInterfaceService",  ['$log', '$rootScope', 'productHandler', 
                                       function($log, $rootScope, productHandler) {
-    return {
+    serviceObject = {
         setArray: function() {
             
             var tempCartArray = [];
             
             for (var q=0; q < productHandler.list.length; q++) {
-                $log.debug(q);
                 if (productHandler.list[q].getQuantity() > 0) {
                     tempCartArray.push({
                         name: productHandler.list[q].getName(),
@@ -236,8 +238,20 @@ app.service("cartInterfaceService",  ['$log', '$rootScope', 'productHandler',
             $log.debug(tempCartArray);
             $rootScope.cartArray = tempCartArray;
 //            $rootScope.$apply();
+        },
+        updateCart: function() {
+            $('#cart input.productQuantity').each(function() {
+                if ($.isNumeric($(this).val()) && $(this).val() >= 0) {
+                    productHandler.quantity.set(productHandler.find($(this).attr("data-itemid")), $(this).val());
+                }
+            });
+            
+            serviceObject.setArray();
+//            productHandler.counter();
         }
     }
+    
+    return serviceObject;
 }]);
 
 
@@ -254,6 +268,15 @@ app.controller("cartCtrl", ['$scope', '$log', 'cartProvider', 'productHandler', 
     $scope.displayCart = function() {
         if (showDebugOutput) { $log.info("Generating cart array!"); }
         cartInterfaceService.setArray();
+    }
+    
+    $scope.updateCart = function() {
+        cartInterfaceService.updateCart();
+//        productHandler.counter();
+    }
+    
+    $scope.doCounter = function() {
+        productHandler.counter();
     }
     
 //    $scope.cartArray = [productHandler.list[0], productHandler.list[1]];
