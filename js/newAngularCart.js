@@ -134,14 +134,25 @@ app.service('itemCounterService', ['productHandler', function(productHandler) {
 
 app.provider('cartProvider', function() {
     // Configuration
-    this.prependURL = "http://0.0.0.0/"
-    this.cartURL = 'cart.html';
-    this.homeURL = 'index.html';
+//    this.prependURL = "http://0.0.0.0/"
+//    this.cartURL = 'cart.html';
+//    this.homeURL = 'index.html';
+//    this.salesTaxRate = 0.06;
+//    this.freeShipping = true;
+//    this.freeShippingMin = 29.99;
+//    this.shippingRate = 8.99;
+////    this.cartName = "cart";
+    
+    this.prependURL = "https:bgodfr5236.github.io/shopping-cart/";
+//    this.prependURL = "http:127.0.0.1:4000/";
+    this.cartURL = "cart.html";
+    this.homeURL = "index.html";
     this.salesTaxRate = 0.06;
-    this.freeShipping = true;
-    this.freeShippingMin = 29.99;
-    this.shippingRate = 8.99;
-//    this.cartName = "cart"; 
+    this.freeShipping = false;
+    this.freeShippingMin = 49.00;
+    this.shippingRate = 7.95;
+    this.cartName = "bgparts_cart";
+
     
     // Functions available to controllers
     this.$get = ['notifyService', 'productHandler', '$log', function(notifyService, productHandler, $log) {
@@ -196,17 +207,17 @@ app.provider('cartProvider', function() {
     }];
 });
 
-app.config(['cartProvider', function(cartProvider) {
-    cartProvider.prependURL = "https://bgodfr5236.github.io/shopping-cart/";
-//    cartProvider.prependURL = "http://127.0.0.1:4000/";
-    cartProvider.cartURL = "cart.html";
-    cartProvider.homeURL = "index.html";
-    cartProvider.salesTaxRate = 0.06;
-    cartProvider.freeShipping = false;
-    cartProvider.freeShippingMin = 49.00;
-    cartProvider.shippingRate = 7.95;
-    cartProvider.cartName = "bgparts_cart";
-}]);
+//app.config(['cartProvider', function(cartProvider) {
+//    cartProvider.prependURL = "https://bgodfr5236.github.io/shopping-cart/";
+////    cartProvider.prependURL = "http://127.0.0.1:4000/";
+//    cartProvider.cartURL = "cart.html";
+//    cartProvider.homeURL = "index.html";
+//    cartProvider.salesTaxRate = 0.06;
+//    cartProvider.freeShipping = false;
+//    cartProvider.freeShippingMin = 49.00;
+//    cartProvider.shippingRate = 7.95;
+//    cartProvider.cartName = "bgparts_cart";
+//}]);
 
 app.controller("cartCtrl", ['$scope', 'cartProvider', 'productHandler', function($scope, cartProvider, productHandler) {
     
