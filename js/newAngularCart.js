@@ -132,18 +132,6 @@ app.service('itemCounterService', ['productHandler', function(productHandler) {
     }
 }]);
 
-app.config(['cartProvider', function(cartProvider) {
-    cartProvider.prependURL = "https://bgodfr5236.github.io/shopping-cart/";
-//    cartProvider.prependURL = "http://127.0.0.1:4000/";
-    cartProvider.cartURL = "cart.html";
-    cartProvider.homeURL = "index.html";
-    cartProvider.salesTaxRate = 0.06;
-    cartProvider.freeShipping = false;
-    cartProvider.freeShippingMin = 49.00;
-    cartProvider.shippingRate = 7.95;
-    cartProvider.cartName = "bgparts_cart";
-}]);
-
 app.provider('cartProvider', function() {
     // Configuration
     this.prependURL = "http://0.0.0.0/"
@@ -207,6 +195,18 @@ app.provider('cartProvider', function() {
         return cartPVDR;
     }];
 });
+
+app.config(['cartProvider', function(cartProvider) {
+    cartProvider.prependURL = "https://bgodfr5236.github.io/shopping-cart/";
+//    cartProvider.prependURL = "http://127.0.0.1:4000/";
+    cartProvider.cartURL = "cart.html";
+    cartProvider.homeURL = "index.html";
+    cartProvider.salesTaxRate = 0.06;
+    cartProvider.freeShipping = false;
+    cartProvider.freeShippingMin = 49.00;
+    cartProvider.shippingRate = 7.95;
+    cartProvider.cartName = "bgparts_cart";
+}]);
 
 app.controller("cartCtrl", ['$scope', 'cartProvider', 'productHandler', function($scope, cartProvider, productHandler) {
     
