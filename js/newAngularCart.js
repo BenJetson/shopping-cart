@@ -38,6 +38,17 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
     $rootScope.itemCount = 0;
     
     var self = {
+        config: {
+            siteURL: "https://bgodfr5236.github.io/shopping-cart/",
+            productDbURL: "products.json",
+            cartURL: "cart.html",
+            homeURL: "index.html",
+            salesTaxRate: 0.06,
+            freeShipping: true,
+            freeShippingMin: 49.00,
+            shippingRate: 7.95,
+            cartName: "bgparts_cart"
+        },
         productDB: {
             list: [],
             load: function() {
@@ -45,7 +56,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
 
                 $http({
                     method: "GET",
-                    url: siteURL + "products.json"
+                    url: self.config.siteURL + self.config.productDbURL
                 }).then(function(response) {
                     for (var p = 0; p < response.data.length; p++) {
                         self.productDB.list.push(new Product(response.data[p]['itemID'], 
@@ -93,7 +104,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
                 self.cart.itemCounter();
 
                 if (document.getElementById("cart") != null) {
-                    self.cart.display.setArray();
+                    self.cart.display.setup();
                 }
             },
             quantity: {
@@ -144,7 +155,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
             },
             clear: function() {
                 if (showDebugOutput) { $log.info("Emptying cart..."); }
-                for (var z=0; z < productHandler.list.length; z++) {
+                for (var z=0; z < self.productDB.list.length; z++) {
                     self.cart.quantity.set(z, 0);
                 }
                 self.cart.write();
@@ -174,13 +185,38 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
                 }
 
                 $rootScope.itemCount = itemTempCounter;
+                return itemTempCounter;
+            },
+            getPriceInfo: function() {
+                
+                var subTotal = 0;
+                for (var d=0; d<self.productDB.list.length; d++) {
+                    subTotal += self.productDB.list[d].getExtendedPrice();
+                }
+                
+                if (self.config.freeShipping && subTotal >= self.config.freeShippingMin) {
+                    var shippingCost = 0;
+                } else {
+                    var shippingCost = self.config.shippingRate;
+                }
+                
+                var tax = subTotal * self.config.salesTaxRate;
+                
+                var grandTotal = subTotal + shippingCost + tax;
+                
+                return {
+                    'subTotal': subTotal.toFixed(2),
+                    'shippingCost': shippingCost.toFixed(2),
+                    'tax': tax.toFixed(2),
+                    'grandTotal': grandTotal.toFixed(2)
+                };
             },
             display: {
-                setArray: function() {
+                setup: function() {
 
                     if (showDebugOutput) { $log.info("Setting cart display..."); }
 
-                    if (self.productDB.list.length > 0) {
+                    if (self.productDB.list.length > 0 && self.cart.itemCounter() > 0) {
                         var tempCartArray = [];
                         for (var q=0; q < self.productDB.list.length; q++) {
                             if (self.productDB.list[q].getQuantity() > 0) {
@@ -188,14 +224,20 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
                                     name: self.productDB.list[q].getName(),
                                     id: self.productDB.list[q].getId(),
                                     quantity: self.productDB.list[q].getQuantity(),
-                                    price: self.productDB.list[q].getPrice(),
-                                    extPrice: self.productDB.list[q].getExtendedPrice(),
+                                    price: self.productDB.list[q].getPrice().toFixed(2),
+                                    extPrice: self.productDB.list[q].getExtendedPrice().toFixed(2),
                                     img: siteURL + self.productDB.list[q].getImgPath()
                                 });
                             }
                         }
-
+                        
+                        var cartPriceInfo = self.cart.getPriceInfo();
+                        
                         $rootScope.cartArray = tempCartArray;
+                        $rootScope.cartSubTotal = cartPriceInfo['subTotal'];
+                        $rootScope.cartShipCost = cartPriceInfo['shippingCost'];
+                        $rootScope.cartTax = cartPriceInfo['tax'];
+                        $rootScope.cartGrandTotal = cartPriceInfo['grandTotal'];
                         $rootScope.showCart = true;
 
                     } else {
@@ -216,7 +258,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
                     });
                     
                     self.cart.write();
-                    self.cart.display.setArray();
+                    self.cart.display.setup();
                     self.cart.itemCounter();
                     
                     if (showDebugOutput) { $log.info("Updating cart from display success."); }

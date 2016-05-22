@@ -27,7 +27,7 @@ needsCarousel: true
 
 <!--<div ng-controller="storeCtrl"></div>-->
 
-<div layout-gt-sm="row" layout-wrap>
+<div layout="column" layout-gt-sm="row" layout-fill layout-wrap>
     {% for category in site.data.categories %}
         <div flex=33>
             <md-card ng-href="{{ category.href | prepend: site.url }}">

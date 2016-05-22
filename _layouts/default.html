@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="shoppingCart" ng-controller="mainCtrl" ng-cloak>
     
     {% include head.html %}
     
-    <body ng-controller="mainCtrl" ng-app="shoppingCart" ng-cloak>
-        
-        <ui-view>
-            {% include header.html %}
-        </ui-view>
+    <body layout="column">
         
         {% include sidenav.html %}
         
+        {% include header.html %}
+        
         <md-content md-swipe-right="toggleNav();">
-            <div class="page-content" layout="column">
-                
+            <div class="page-content">
                 {{ content }}
                 
                 {% include footer.html %}
-                
             </div>
         </md-content>
-        
     </body>
 </html>

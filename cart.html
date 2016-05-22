@@ -8,7 +8,7 @@ onload: "loadCart();"
 <h2 class="page-heading">Cart</h2>
 <div ng-controller="cartCtrl">
     
-    <div id="cart" onload="displayCart();">
+    <div id="cart" onload="displayCart();" ng-show="$root.showCart">
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="item in $root.cartArray track by $index">
                 <img ng-src="[[item.img]]" class="md-avatar cartItemImg">
@@ -21,8 +21,14 @@ onload: "loadCart();"
                         <div flex=25>
                             <md-input-container>
                                 <label>Quantity</label>
-                                <input class="productQuantity" data-itemid="[[item.id]]" 
-                                       value="[[item.quantity]]">
+                                <input class="productQuantity" 
+                                       data-origvalue="[[item.quantity]]"
+                                       data-itemid="[[item.id]]" 
+                                       value="[[item.quantity]]"
+                                       onblur="if (this.value > 99) { this.value = 99; } 
+                                                else if (this.value < 0) { this.value = this.dataset.origvalue; }
+                                                else if (!($.isNumeric(this.value)) && this.value.length != 0) 
+                                                  { this.value = this.dataset.origvalue; }">
                             </md-input-container>
                         </div>
                         <span flex></span>
@@ -33,11 +39,23 @@ onload: "loadCart();"
                     </div>
                 </div>
             </md-list-item>
+            <md-list-item>
+                <div class="md-item-text" layout-fill layout="column" layout-align="center end">
+                    <span class="cartSubTotal">Subtotal: <span ng-bind="$root.cartSubTotal"></span></span>
+                    <span class="cartTax">Tax: <span ng-bind="$root.cartTax"></span></span>
+                    <span class="cartShipCost">Shipping: <span ng-bind="$root.cartShipCost"></span></span>
+                    <span class="cartGrandTotal">Grand Total: <span ng-bind="$root.cartGrandTotal"></span></span>
+                </div>
+            </md-list-item>
         </md-list>
     </div>
     
-    <div layout="row">
+    <div layout="row" ng-show="$root.showCart">
         <md-button ng-click="updateCart();">Update</md-button>
         <md-button class="md-primary" ng-href="checkout.html">Checkout</md-button>
+    </div>
+    
+    <div layout="column" ng-hide="$root.showCart">
+        <p>Your cart is empty.</p>
     </div>
 </div>

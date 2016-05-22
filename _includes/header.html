@@ -1,56 +1,22 @@
-<header>
-    
-    <md-toolbar class="md-whiteframe-1dp">
+<!--<md-toolbar md-scroll-shrink ng-if="true" class="md-whiteframe-1dp">-->
+<md-toolbar class="md-whiteframe-1dp">
 
-        <!-- Title -->
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleNav();">
-                <md-icon class="material-icons">menu</md-icon>
-            </md-button>
-            <md-button md-no-ink ng-href="https://bgodfr5236.github.io/shopping-cart/">
-                <h2 id="site-title">Ben's PC Parts</h2>
-            </md-button>
-            <!-- Add spacer, to align navigation to the right -->
-            <span flex></span>
-            
-            <md-button class="md-raised" ng-href="cart.html">
-                <div id="cart_links" layout="row" ng-controller="cartCtrl">
-                    <md-icon class="material-icons">shopping_cart</md-icon>
-                    <!--<span class="cart_link">YOUR CART</span>-->
-                    <div class="item_count">&nbsp;<span ng-bind="$root.itemCount"></span> items</div>
-<!--                    <div class="item_count">&nbsp;<span id="cartCtr"></span> items</div>-->
-                </div>
-            </md-button>
-            
-                <!-- Navigation. We hide it in small screens. -->
-    <!--
-                <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                </nav>
-    -->
-<!--
-            <div id="cart_links">
-                <a href="cart.html"><img class="cart_icon" src="img/cart_icon.png" alt="cart icon" /></a>
-                <span class="cart_link"><a id="cart_link" href="#">Shopping Cart</a></span> <br />
-                <span class="item_count">Items (<span id="item_count">0</span>)</span>
-                <span class="checkout_link"><a id="checkout_link" href="#">Checkout</a></span>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleNav();">
+            <md-icon class="material-icons">menu</md-icon>
+        </md-button>
+        <md-button md-no-ink ng-href="https://bgodfr5236.github.io/shopping-cart/">
+            <h3 id="site-title">Ben's PC Parts</h3>
+        </md-button>
+        <span flex></span>
+
+        <md-button class="md-raised" ng-href="cart.html">
+            <div id="cart_links" layout="row" ng-controller="cartCtrl">
+                <md-icon class="material-icons">shopping_cart</md-icon>
+                <div class="item_count">&nbsp;<span ng-bind="$root.itemCount"></span> items</div>
             </div>
--->
-        </div>
-    </md-toolbar>
-<!--
-    <h1><a href="index.html">Store Name</a></h1>
+        </md-button>
 
-    <!-- begin cart link widget -->
-<!--
-    <div id="cart_links">
-        <a href="cart.html"><img class="cart_icon" src="img/cart_icon.png" alt="cart icon" /></a>
-        <span class="cart_link"><a id="cart_link" href="#">Shopping Cart</a></span> <br />
-        <span class="item_count">Items (<span id="item_count">0</span>)</span>
-        <span class="checkout_link"><a id="checkout_link" href="#">Checkout</a></span>
     </div>
--->  
-</header>
+    
+</md-toolbar>
