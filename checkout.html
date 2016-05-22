@@ -6,10 +6,7 @@ layout: default
 
 <h2 class="page-heading">Checkout</h2>
 
-<div ng-controller="cartCtrl">
-    <div onload="loadCart();"></div>
-</div>
-<div layout-padding>
+<div layout-padding ng-controller="cartCtrl">
     <form name="checkoutForm" method="post" action="thankYOU.html">
         <div layout="column" layout-gt-sm="row" layout-wrap>
             <md-input-container flex=10>
@@ -61,6 +58,7 @@ layout: default
                 <input name="cardexp" required>
             </md-input-container>
         </div>
-        <md-button type="submit" class="md-primary">Submit</md-button>
+        <md-button ng-click="emptyCart();">Empty cart now</md-button>
+        <md-button type="submit" ng-click="emptyCart();" class="md-primary">Submit</md-button>
     </form>
 </div>
