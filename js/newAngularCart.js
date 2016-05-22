@@ -314,8 +314,9 @@ app.controller("cartCtrl", ['$scope', '$log', 'storeManager',
         storeManager.cart.display.update();
     }
     
-    $scope.emptyCart = function() {
+    $scope.checkoutComplete = function() {
         storeManager.cart.clear();
+        window.location.href = siteURL + "checkout.html";
     }
     
 }]);
