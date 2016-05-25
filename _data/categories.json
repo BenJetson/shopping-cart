@@ -2,46 +2,49 @@
     {
         "prettyTitle": "Accessories",
         "dir": "accessories",
-        "img": "logitech_g710+.jpg"
+        "img": "logitech_g710+.jpg",
+        "href": "accessories"
     },
     {
         "prettyTitle": "Cases",
         "dir": "cases",
-        "img": "corsair_carbide_spec-02.jpg"
+        "img": "corsair_carbide_spec-02.jpg",
+        "href": "cases"
     },
     {
         "prettyTitle": "Processors",
         "dir": "cpus",
-        "img": "intel_i3_6100_lga1150.jpg"
+        "img": "intel_i3_6100_lga1150.jpg",
+        "href": "processors"
     },
     {
         "prettyTitle": "Fans",
         "dir": "fans",
-        "img": "corsair_air-series_af120_led_blue.jpg"
+        "img": "corsair_air-series_af120_led_blue.jpg",
+        "href": "fans"
     },
     {
         "prettyTitle": "Graphics Cards",
         "dir": "gpus",
-        "img": "evga_geforce-gtx-980-4gb.jpg"
+        "img": "evga_geforce-gtx-980-4gb.jpg",
+        "href": "gpus"
     },
     {
         "prettyTitle": "Motherboards",
         "dir": "motherboards",
-        "img": "gigabyte_ga-g1_lga1151_atx.jpg"
-    },
-    {
-        "prettyTitle": "Optical Drives",
-        "dir": "optical_drives",
-        "img": "lg_supermulti_24x_sata.jpg"
+        "img": "gigabyte_ga-g1_lga1151_atx.jpg",
+        "href": "motherboards"
     },
     {
         "prettyTitle": "Power Supplies",
         "dir": "power_supplies",
-        "img": "corsair_850w_rm850.jpg"
+        "img": "corsair_850w_rm850.jpg",
+        "href": "psus"
     },
     {
         "prettyTitle": "Memory",
         "dir": "ram",
-        "img": "corsair_vengance_8gbx4_ddr4_2666mhz.jpg"
+        "img": "corsair_vengance_8gbx4_ddr4_2666mhz.jpg",
+        "href": "motherboards"
     }
 ]

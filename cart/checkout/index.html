@@ -8,16 +8,12 @@ layout: default
 
 <div layout-padding ng-controller="cartCtrl">
     <form name="checkoutForm" ng-submit="checkoutComplete();" method="get">
-        <div layout="column" layout-gt-sm="row" layout-wrap>
-            <md-input-container flex=10>
-                <label>Title</label>
-                <input md-maxlenegth="5" required name="title">
-            </md-input-container>
-            <md-input-container flex=45>
+        <div layout="column" layout-gt-xs="row" layout-wrap>
+            <md-input-container flex=50>
                 <label>First Name</label>
                 <input required md-autofocus name="firstname">
             </md-input-container>
-            <md-input-container flex=45>
+            <md-input-container flex=50>
                 <label>Last Name</label>
                 <input required name="lastname">
             </md-input-container>
@@ -51,11 +47,12 @@ layout: default
             </md-input-container>
             <md-input-container flex=5>
                 <label>CV #</label>
-                <input name="cardcv" pattern="[0-9]{3}" required>
+                <input type="password" name="cardcv" onkeyup="if (this.value.length > 3) { this.value = this.value.substr(0,3); }"
+                       pattern="[0-9]{3}" required>
             </md-input-container>
             <md-input-container flex=15>
                 <label>Expiration</label>
-                <input name="cardexp" required>
+                <input name="cardexp" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])" required>
             </md-input-container>
         </div>
 <!--        <md-button ng-click="emptyCart();">Empty cart now</md-button>-->

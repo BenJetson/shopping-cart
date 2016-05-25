@@ -130,7 +130,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
                 
                 if (id > -1) {
                     if (self.cart.quantity.get(id) == 0) {
-                        notifyService.alert("The item '" + self.productDB.list[id].getName() + "' has been added to your cart.");
+                        notifyService.alert("The item '" + self.productDB.list[id].getName() + "' has been added to your cart.", "", "Close");
                         self.cart.add(id);
                     } else {
                         notifyService.confirm("The item '" + self.productDB.list[id].getName() + "' is already " +
@@ -316,7 +316,7 @@ app.controller("cartCtrl", ['$scope', '$log', 'storeManager',
     
     $scope.checkoutComplete = function() {
         storeManager.cart.clear();
-        window.location.href = siteURL + "thankYOU.html";
+        window.location.href = siteURL + "thanks";
     }
     
 }]);

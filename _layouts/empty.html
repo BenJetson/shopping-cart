@@ -9,12 +9,10 @@
         
         {% include header.html %}
         
-        <md-content md-swipe-right="toggleNav();" layout-padding>
-            <div class="page-content">
-                {{ content }}
-                
-                {% include footer.html %}
-            </div>
+        <md-content md-swipe-right="toggleNav();">
+            {{ content }}
+            
+            {% include footer.html %}
         </md-content>
     </body>
 </html>

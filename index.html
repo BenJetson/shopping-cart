@@ -1,61 +1,57 @@
 ---
-layout: default
+layout: empty
 title: Home
 titleInTab: false
 needsCarousel: true
 ---
-
-<h1 class="page-heading">Home</h1>
-
-<div layout="row">
-    <md-card flex=100>
-        <md-card-content>
-            <img src="https://dummyimage.com/1000x350/dadada/000caf.png&text=carousel+here">
-<!--
-            <div id="carousel" layout="none">
-                <img src="https://dummyimage.com/1000x350/dadada/000caf.png">
-                <img src="https://dummyimage.com/1000x350/dadada/000caf.png">
-                <img src="https://dummyimage.com/1000x350/dadada/000caf.png">
-                <img src="https://dummyimage.com/1000x350/dadada/000caf.png">
-                <img src="https://dummyimage.com/1000x350/dadada/000caf.png">
-                <img src="https://dummyimage.com/1000x350/dadada/000caf.png">
-            </div>
--->
-        </md-card-content>
-    </md-card>
+<div ng-controller="carouselCtrl">
+    <div id="carousel">
+        <img src="https://dummyimage.com/1200x425/dadada/000caf.png">
+        <img src="https://dummyimage.com/1200x425/dadada/000caf.png">
+        <img src="https://dummyimage.com/1200x425/dadada/000caf.png">
+        <img src="https://dummyimage.com/1200x425/dadada/000caf.png">
+        <img src="https://dummyimage.com/1200x425/dadada/000caf.png">
+        <img src="https://dummyimage.com/1200x425/dadada/000caf.png">
+    </div>
 </div>
 
 <!--<div ng-controller="storeCtrl"></div>-->
+<div class="page-content">
+    <div layout="row" layout-gt-xs="row" layout-align="center center" layout-wrap id="catCarousel">
+        {% for category in site.data.categories %}
+            <div flex-gt-xs=25 flex=50>
+                <md-card ng-href="{{ category.href | prepend: site.url }}">
+                    <img ng-src="{{ category.img | prepend: '/' | prepend: category.dir | prepend: 'img/products/' | prepend: site.url }}">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <h2>{{category.prettyTitle}}</h2>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p>{{category.desc}}</p>
+                    </md-card-content>
+                </md-card>
+            </div>
+        {% endfor %}
+    </div>
 
-<div layout="column" layout-gt-sm="row" layout-fill layout-wrap>
-    {% for category in site.data.categories %}
-        <div flex=33>
-            <md-card ng-href="{{ category.href | prepend: site.url }}">
-                <img ng-src="{{ category.img | prepend: '/' | prepend: category.dir | prepend: 'img/products/' | prepend: site.url }}">
-                <md-card-title>
-                    <md-card-title-text>
-                        <h2>{{category.prettyTitle}}</h2>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                    <p>{{category.desc}}</p>
-                </md-card-content>
-            </md-card>
-        </div>
-    {% endfor %}
 </div>
 
-
-<!--
 <script>
-    $('#carousel').owlCarousel({
-        items: 1,
-        margin: 10,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 3000,
-        autoplayHoverPause: true,
-        dots: true
-    })
+    
+    $(document).ready(function() {
+        setTimeout(doCarousel, 25);
+    });
+    
+    function doCarousel() {
+        $('#carousel').owlCarousel({ 
+            items: 1, 
+            margin: 10, 
+            loop: true, 
+            autoplay: true, 
+            autoplayTimeout: 3000, 
+            autoplayHoverPause: true, 
+            dots: true 
+        });
+    }
 </script>
--->

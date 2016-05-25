@@ -1,22 +1,26 @@
-<!--<md-toolbar md-scroll-shrink ng-if="true" class="md-whiteframe-1dp">-->
-<md-toolbar class="md-whiteframe-1dp">
+<header>
+<!--    <md-toolbar md-scroll-shrink ng-if="true" class="md-whiteframe-1dp">-->
+    <md-toolbar class="md-whiteframe-1dp">
 
-    <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleNav();">
-            <md-icon class="material-icons">menu</md-icon>
-        </md-button>
-        <md-button md-no-ink ng-href="https://bgodfr5236.github.io/shopping-cart/">
-            <h3 id="site-title">Ben's PC Parts</h3>
-        </md-button>
-        <span flex></span>
+        <div class="md-toolbar-tools" layout="row">
+            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleNav();">
+                <md-icon class="material-icons">menu</md-icon>
+            </md-button>
+            <md-button md-no-ink ng-href="{{ site.url }}">
+<!--                <h3>Ben's PC Parts</h3>-->
+                <img src="{{'img/logo.png' | prepend: site.url }}" aria-label="Logo" alt="Logo"
+                     style="max-width: 200px;">
+            </md-button>
+            <span flex></span>
 
-        <md-button class="md-raised" ng-href="cart.html">
-            <div id="cart_links" layout="row" ng-controller="cartCtrl">
-                <md-icon class="material-icons">shopping_cart</md-icon>
-                <div class="item_count">&nbsp;<span ng-bind="$root.itemCount"></span> items</div>
-            </div>
-        </md-button>
+            <md-button class="md-raised" ng-href="{{ 'cart' | prepend: site.url }}">
+                <div id="cart_links" layout="row" ng-controller="cartCtrl">
+                    <md-icon class="material-icons">shopping_cart</md-icon>
+                    <div class="item_count">&nbsp;<span ng-bind="$root.itemCount"></span> items</div>
+                </div>
+            </md-button>
 
-    </div>
-    
-</md-toolbar>
+        </div>
+
+    </md-toolbar>
+</header>

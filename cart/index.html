@@ -2,7 +2,6 @@
 layout: default
 title: "Cart"
 titleInTab: true
-onload: "loadCart();"
 ---
 
 <h2 class="page-heading">Cart</h2>
@@ -52,7 +51,7 @@ onload: "loadCart();"
     
     <div layout="row" ng-show="$root.showCart">
         <md-button ng-click="updateCart();">Update</md-button>
-        <md-button class="md-primary" ng-href="checkout.html">Checkout</md-button>
+        <md-button class="md-primary" ng-href="{{ 'cart/checkout' | prepend: site.url }}">Checkout</md-button>
     </div>
     
     <div layout="column" ng-hide="$root.showCart">
