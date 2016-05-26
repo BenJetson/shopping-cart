@@ -19,30 +19,60 @@ needsCarousel: true
 
 <!--<div ng-controller="storeCtrl"></div>-->
 <div class="page-content">
-    <div layout="row" layout-gt-xs="row" layout-align="center center" layout-wrap id="catCarousel">
-        {% for category in site.data.categories %}
-            <div flex-gt-xs=25 flex=50 ng-href="{{ category.href | prepend: site.url }}">
-                <md-card>
-                    <img ng-src="{{ category.img | prepend: '/' | prepend: category.dir | prepend: 'img/products/' | prepend: site.url }}">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <h2>{{category.prettyTitle}}</h2>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-content>
-                        <p>{{category.desc}}</p>
-                    </md-card-content>
-                    <md-card-actions>
-                        <md-button ng-href="{{ category.href | prepend: 'category/' | prepend: site.url }}">Go!</md-button>
-                    </md-card-actions>
-                </md-card>
-            </div>
-        {% endfor %}
+    <div layout="column" layout-gt-xs="row" layout-align="center start" layout-wrap>
+        <div layout="column" flex=50>
+            <md-card flex=50>
+                <md-card-title>
+                    <span class="md-headline">Welcome!</span>
+                </md-card-title>
+                <md-card-content>
+                    <p>We're a small local shop in Greenville, South Carolina that has been selling high-quality compter parts since January 1st, 1970 at 12:00 AM.</p>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-href="{{'about' | prepend: site.url}}">More Info</md-button>
+                </md-card-actions>
+            </md-card>
+            <md-card flex=55>
+                <md-card-title>
+                    <span class="md-headline">Sign up for our email register!</span>
+                </md-card-title>
+                <md-card-content>
+                    <form id="emailForm" onsubmit="fixForm();">
+                        <md-input-container flex=100>
+                            <label>Email</label>
+                            <input type="email" required>
+                        </md-input-container>
+                        <md-button type="submit">Submit</md-button>
+                    </form>
+                    <div ng-hide="true" id="emailThanks">Thanks! We'll be in touch.</div>
+                </md-card-content>
+            </md-card>
+        </div>
+        <md-card flex=40>
+            <img src="{{'img/public-domain-image-computer-motherboard.jpg' | prepend: site.url}}" 
+                 class="md-card-image" alt="pc">
+            <md-card-title>
+                <span class="md-headline">Need a hand?</span>
+            </md-card-title>
+            <md-card-content>
+                <p>We also can build you a custom-built PC for a small fee. We'll work with you to help you find the perfect balance between practicality, performance, and price to create a PC that fits your needs. Call us!</p>
+            </md-card-content>
+        </md-card>
+            
     </div>
 
 </div>
 
 <script>
+    
+//    This is here to fix a problem with the image carousel not loading correctly.
+//    The issue arises because this runs before the AngularJS compiler does, so
+//      the carouosel gets the size of a blank page (since it's uncompiled) and
+//      renders the carousel at a very tiny size.
+//    Stack Overflow had a similar thread about Angular and OWL together, but the 
+//      answers there didn's work.
+//    Apparently, when all else failed, this 25 *millisecond* delay was just enough
+//      time to get the compiler to execute before this does. 
     
     $(document).ready(function() {
         setTimeout(doCarousel, 25);
@@ -59,4 +89,20 @@ needsCarousel: true
             dots: true 
         });
     }
+</script>
+
+<script>
+    
+//    Handles the animation after the user submits the email form. 
+    
+    function fixForm() {
+        $thankYou = '<p id="emailThanks">Thanks! Well be in touch.<p>'
+        $thankYou = $($thankYou)
+        $($thankYou).hide();
+        
+        $('#emailForm').slideUp();
+        $('#emailForm').after($thankYou);
+        setTimeout(function() {$('#emailThanks').slideDown();},200);
+    }
+    
 </script>

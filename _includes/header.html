@@ -18,7 +18,7 @@
             <nav>
                 {% for category in site.data.categories %}
                 <md-button ng-href="{{ category.href | prepend: 'category/' | prepend: site.url}}" 
-                            hide show-gt-md md-no-ink>
+                            hide show-gt-lg md-no-ink>
                     <span class="navlink">{{category.prettyTitle}}</span>
                 </md-button>
                 {% endfor %}

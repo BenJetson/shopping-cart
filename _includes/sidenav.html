@@ -1,6 +1,6 @@
 <div id="burgerMenu" md-swipe-left="toggleNav();">
     <md-sidenav class="md-sidenav-left md-whiteframe-8dp" md-component-id="left" layout="column">
-        <md-toolbar class="md-hue-3 md-tall" layout-align="center center">
+        <md-toolbar class="md-hue-2 md-tall" layout-align="center center">
             <div layout="row" id="site-header-logo">
                 <img src="{{'img/logo-sm.png' | prepend: site.url }}" aria-label="Logo" alt="Logo">
                 <h3 style="font-size: 32px;">Ben's PC Parts</h3>
@@ -15,7 +15,7 @@
                     </div>
                 </md-list-item>
             </md-list>
-            <md-subheader class="md-primary">Categories</md-subheader>
+            <md-subheader class="md-primary">Products by Category</md-subheader>
             <md-list>
                 {% for item in site.data.categories %}
                 <md-list-item ng-href="{{ item.href | prepend: 'category/' | prepend: site.url }}">
@@ -29,7 +29,7 @@
                     <div flex=15><md-icon class="material-icons">info</md-icon></div>
                     <div flex=85>About Us</div>
                 </md-list-item>
-                <md-list-item ng-href="{{'contact' | prepend: site.url}}">
+                <md-list-item ng-href="{{'contact-us' | prepend: site.url}}">
                     <div flex=15><md-icon class="material-icons">email</md-icon></div>
                     <div flex=85>Contact Us</div>
                 </md-list-item>

@@ -67,4 +67,10 @@ app.controller('carouselCtrl', ['$scope', '$log', function($scope, $log) {
         });
     });
     
+    $scope.fixForm = function() {
+        $log.debug("ASDF"); 
+        $('#emailForm').slideUp();
+        $('#emailThanks').attr('ng-hide', 'false');
+    }
+    
 }]);
