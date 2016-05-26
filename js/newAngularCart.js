@@ -185,6 +185,13 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
                 }
 
                 $rootScope.itemCount = itemTempCounter;
+                
+                if (itemTempCounter == 1) {
+                    $rootScope.itemCountLabel = "Item";
+                } else {
+                    $rootScope.itemCountLabel = "Items";
+                }
+                
                 return itemTempCounter;
             },
             getPriceInfo: function() {

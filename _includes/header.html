@@ -7,16 +7,26 @@
                 <md-icon class="material-icons">menu</md-icon>
             </md-button>
             <md-button md-no-ink ng-href="{{ site.url }}">
-<!--                <h3>Ben's PC Parts</h3>-->
-                <img src="{{'img/logo.png' | prepend: site.url }}" aria-label="Logo" alt="Logo"
-                     style="max-width: 200px;">
+                <div layout="row" id="site-header-logo">
+                    <img src="{{'img/logo-sm.png' | prepend: site.url }}" aria-label="Logo" alt="Logo">
+                    <h3>Ben's PC Parts</h3>
+                </div>
             </md-button>
+            
             <span flex></span>
-
+            
+            {% for category in site.data.categories %}
+            <md-button ng-href="{{ category.href | prepend: 'category/' | prepend: site.url}}" hide show-gt-md>
+                {{category.prettyTitle}}
+            </md-button>
+            {% endfor %}
+            
+            <span flex></span>
+            
             <md-button class="md-raised" ng-href="{{ 'cart' | prepend: site.url }}">
                 <div id="cart_links" layout="row" ng-controller="cartCtrl">
                     <md-icon class="material-icons">shopping_cart</md-icon>
-                    <div class="item_count">&nbsp;<span ng-bind="$root.itemCount"></span> items</div>
+                    <div class="item_count">&nbsp;<span ng-bind="$root.itemCount"></span> <span ng-bind="$root.itemCountLabel">items</span></div>
                 </div>
             </md-button>
 

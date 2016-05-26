@@ -20,13 +20,20 @@ md-content {
     background-color: #fafafa !important;
 }
 
-.item-price {
-    padding: 0 5px;
+#site-header-logo {
+    vertical-align: middle;
 }
 
-header h3 {
-    text-transform: none !important;
-    font-size: 18px !important;
+#site-header-logo h3 {
+    margin-left: 5px;
+    font-size: 26px;
+    font-family: 'Hanalei Fill', cursive;
+    color: #008;
+}
+
+#site-header-logo img {
+    max-width: 40px;
+    max-height: 40px;
 }
 
 .item-desc {
@@ -36,6 +43,11 @@ header h3 {
     color: #555;
     font-size: 16px;
 }
+
+.item-price {
+    padding: 0 5px;
+}
+
 
 #catCarousel img {
     padding: 15px;
