@@ -29,6 +29,7 @@
             <md-button class="md-raised" ng-href="{{ 'cart' | prepend: site.url }}">
                 <div id="cart_links" layout="row" ng-controller="cartCtrl">
                     <md-icon class="material-icons">shopping_cart</md-icon>
+                    <span flex></span>
                     <div class="item_count">&nbsp;<span ng-bind="$root.itemCount"></span> <span ng-bind="$root.itemCountLabel">items</span></div>
                 </div>
             </md-button>
