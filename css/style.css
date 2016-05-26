@@ -36,6 +36,14 @@ md-content {
     max-height: 40px;
 }
 
+nav a,
+nav a:link,
+nav a:hover,
+nav a:active,
+nav a:visited,
+span.navlink{
+    color: #008 !important;
+}
 .item-desc {
     box-sizing: border-box;
     display: block;

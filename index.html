@@ -21,8 +21,8 @@ needsCarousel: true
 <div class="page-content">
     <div layout="row" layout-gt-xs="row" layout-align="center center" layout-wrap id="catCarousel">
         {% for category in site.data.categories %}
-            <div flex-gt-xs=25 flex=50>
-                <md-card ng-href="{{ category.href | prepend: site.url }}">
+            <div flex-gt-xs=25 flex=50 ng-href="{{ category.href | prepend: site.url }}">
+                <md-card>
                     <img ng-src="{{ category.img | prepend: '/' | prepend: category.dir | prepend: 'img/products/' | prepend: site.url }}">
                     <md-card-title>
                         <md-card-title-text>
@@ -32,6 +32,9 @@ needsCarousel: true
                     <md-card-content>
                         <p>{{category.desc}}</p>
                     </md-card-content>
+                    <md-card-actions>
+                        <md-button ng-href="{{ category.href | prepend: 'category/' | prepend: site.url }}">Go!</md-button>
+                    </md-card-actions>
                 </md-card>
             </div>
         {% endfor %}
