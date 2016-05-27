@@ -17,8 +17,8 @@ titleInTab: true
                         <span class="cartItemID">ID: <span class="productID">[[item.id]]</span></span>
                     </div>
                     <div flex=40 layout="row" layout-fill>
-                        <div flex=25>
-                            <md-input-container>
+                        <div flex=35>
+                            <md-input-container style="margin: 18px 0 0 0;">
                                 <label>Quantity</label>
                                 <input class="productQuantity" 
                                        data-origvalue="[[item.quantity]]"
@@ -31,15 +31,18 @@ titleInTab: true
                             </md-input-container>
                         </div>
                         <span flex></span>
-                        <div flex=70 layout="row" layout-gt-sm="column">
-                            <span class="cartItemExtPrice">$[[item.extPrice]]</span>&nbsp;
+                        <div flex=65 layout="column" layout-align="center end">
+                            <span class="cartItemExtPrice">$[[item.extPrice]]</span><br>
                             <span class="cartItemPrice">($[[item.price]] each)</span>
                         </div>
                     </div>
                 </div>
+<!--                <md-divider ng-if="!$last"></md-divider>-->
+                <md-divider></md-divider>
             </md-list-item>
             <md-list-item>
                 <div class="md-item-text" layout-fill layout="column" layout-align="center end">
+                    <span><br></span>
                     <span class="cartSubTotal">Subtotal: <span ng-bind="$root.cartSubTotal"></span></span>
                     <span class="cartTax">Tax: <span ng-bind="$root.cartTax"></span></span>
                     <span class="cartShipCost">Shipping: <span ng-bind="$root.cartShipCost"></span></span>
@@ -49,9 +52,9 @@ titleInTab: true
         </md-list>
     </div>
     
-    <div layout="row" ng-show="$root.showCart">
-        <md-button ng-click="updateCart();">Update</md-button>
-        <md-button class="md-primary" ng-href="{{ 'cart/checkout' | prepend: site.url }}">Checkout</md-button>
+    <div layout="row" layout-align="end start" ng-show="$root.showCart">
+        <md-button class="md-raised md-accent" ng-click="updateCart();">Update</md-button>
+        <md-button class="md-primary md-raised" ng-href="{{ 'cart/checkout' | prepend: site.url }}">Checkout</md-button>
     </div>
     
     <div layout="column" ng-hide="$root.showCart">

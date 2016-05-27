@@ -36,6 +36,14 @@ md-content {
     max-height: 40px;
 }
 
+md-card > img:not(md-card-content) {
+    height: inherit !important;
+}
+
+footer {
+    margin-top: 5px;
+}
+
 nav a,
 nav a:link,
 nav a:hover,

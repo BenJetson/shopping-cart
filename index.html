@@ -19,9 +19,9 @@ needsCarousel: true
 
 <!--<div ng-controller="storeCtrl"></div>-->
 <div class="page-content">
-    <div layout="column" layout-gt-xs="row" layout-align="center start" layout-wrap>
+    <div layout="column" layout-gt-xs="row" layout-align="center start">
         <div layout="column" flex=50>
-            <md-card flex=50>
+            <md-card>
                 <md-card-title>
                     <span class="md-headline">Welcome!</span>
                 </md-card-title>
@@ -32,36 +32,55 @@ needsCarousel: true
                     <md-button ng-href="{{'about' | prepend: site.url}}">More Info</md-button>
                 </md-card-actions>
             </md-card>
-            <md-card flex=55>
+            <md-card>
+                <img ng-src="{{ 'img/sale.png' | prepend: site.url }}"
+                     class="md-card-image">
                 <md-card-title>
-                    <span class="md-headline">Sign up for our email register!</span>
+                    <span class="md-headline">Accessories on-sale this week!</span>
                 </md-card-title>
                 <md-card-content>
-                    <form id="emailForm" onsubmit="fixForm();">
-                        <md-input-container flex=100>
-                            <label>Email</label>
-                            <input type="email" required>
-                        </md-input-container>
-                        <md-button type="submit">Submit</md-button>
-                    </form>
-                    <div ng-hide="true" id="emailThanks">Thanks! We'll be in touch.</div>
+                    <p>Those of you looking to build a PC this summer are in luck! We're having a huge sale on accessories over the next week, ending 06/03/2016.</p>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-href="{{ 'category/accessories' | prepend: site.url }}">Check it out!</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+        <div layout="column" flex=40>
+            <md-card>
+                <img ng-src="{{'img/public-domain-image-computer-motherboard.jpg' | prepend: site.url}}" 
+                     class="md-card-image" alt="pc">
+                <md-card-title>
+                    <span class="md-headline">Need a hand?</span>
+                </md-card-title>
+                <md-card-content>
+                    <p>We also can build you a custom-built PC for a small fee. We'll work with you to help you find the perfect balance between practicality, performance, and price to create a PC that fits your needs. Call us!</p>
+                </md-card-content>
+            </md-card>
+            <md-card>
+                <md-card-title>
+                    <span class="md-headline">Sign up for our newsletter!</span>
+                </md-card-title>
+                <md-card-content>
+                    <div id="emailForm">
+                        <form onsubmit="fixForm();" layout="column" layout-align="start center" layout-fill>
+                            <md-input-container layout-fill flex=100>
+                                <label>Name</label>
+                                <input type="text" required>
+                            </md-input-container>
+                            <md-input-container layout-fill flex=100>
+                                <label>Email</label>
+                                <input type="email" required>
+                            </md-input-container>
+                            <md-button type="submit">Submit</md-button>
+                        </form>
+                    </div>
                 </md-card-content>
             </md-card>
         </div>
-        <md-card flex=40>
-            <img src="{{'img/public-domain-image-computer-motherboard.jpg' | prepend: site.url}}" 
-                 class="md-card-image" alt="pc">
-            <md-card-title>
-                <span class="md-headline">Need a hand?</span>
-            </md-card-title>
-            <md-card-content>
-                <p>We also can build you a custom-built PC for a small fee. We'll work with you to help you find the perfect balance between practicality, performance, and price to create a PC that fits your needs. Call us!</p>
-            </md-card-content>
-        </md-card>
-            
     </div>
-
 </div>
+
 
 <script>
     
@@ -96,13 +115,13 @@ needsCarousel: true
 //    Handles the animation after the user submits the email form. 
     
     function fixForm() {
-        $thankYou = '<p id="emailThanks">Thanks! Well be in touch.<p>'
-        $thankYou = $($thankYou)
+        $thankYou = $('<p id="emailThanks">Thanks! Well be in touch.<p>')
         $($thankYou).hide();
         
-        $('#emailForm').slideUp();
+        $('#emailForm').slideUp(250);
         $('#emailForm').after($thankYou);
-        setTimeout(function() {$('#emailThanks').slideDown();},200);
+        setTimeout(function() {$('#emailThanks').slideDown();},250);
+        localStorage["showEmail"] = false;
     }
     
 </script>
