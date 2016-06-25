@@ -39,7 +39,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
     
     var self = {
         config: {
-            siteURL: "https://bgodfr5236.github.io/shopping-cart/",
+            siteURL: "https://benjetson.github.io/shopping-cart/",
             productDbURL: "products.json",
             cartURL: "cart.html",
             homeURL: "index.html",
