@@ -1,5 +1,5 @@
 var showDebugOutput = true;
-var siteURL = "https://bgodfr5236.github.io/shopping-cart/";
+var siteURL = "https://benjetson.github.io/shopping-cart/";
 
 function Product(id, name, price, category, img) {
     // fields set from constructor
