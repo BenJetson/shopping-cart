@@ -51,10 +51,11 @@ app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToas
                             "or ordered. Also, please do not enter any real personal information " + 
                             "into this site. I made this website for educational purposes in a " + 
                             "web design class. Feel free to browse around -- enjoy!",
-                            "Please Read", "I Understand");
-        if (showDebugOutput) { $log.info("User dismissed fake site advisory modal. Saving last visit timestamp to disk..."); }
-        localStorage["bgcart-visit-timestamp"] = currentTime;
-        if (showDebugOutput) { $log.info("Saving last visit timestamp to disk success."); }
+                            "Please Read", "I Understand").then(function() {
+                                        if (showDebugOutput) { $log.info("User dismissed fake site advisory modal. Saving last visit timestamp to disk..."); }
+                                        localStorage["bgcart-visit-timestamp"] = currentTime;
+                                        if (showDebugOutput) { $log.info("Saving last visit timestamp to disk success.");} 
+                            });
     } else {
         $mdToast.show(
             $mdToast.simple()
