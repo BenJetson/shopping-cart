@@ -55,7 +55,7 @@ app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToas
         
         if (showDebugOutput) { $log.info("Saving last visit timestamp to disk..."); }
         localStorage["bgcart-visit-timestamp"] = currentTime;
-        if (showDebugOutput) { $log.info("Saving last visit timestamp to disk success.");} 
+        if (showDebugOutput) { $log.info("Last visit timestamp save to disk success.");} 
     } else {
         $mdToast.show(
             $mdToast.simple()
