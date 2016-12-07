@@ -56,7 +56,7 @@ app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToas
         $mdToast.show(
             $mdToast.simple()
                 .textContent("Remember that BGParts is not a real shopping site.")
-                .position("top right")
+                .position("bottom right")
                 .hideDelay(8000)
         );
     }
