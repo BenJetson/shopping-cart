@@ -38,7 +38,7 @@ app.factory('notifyService', ['$mdDialog', function($mdDialog) {
     }
 }]);
 
-app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToast','notifyService', function($scope, $log, $mdMedia, $mdSidenav, $mdToast, notifyService) {
+app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToast', 'notifyService', function($scope, $log, $mdMedia, $mdSidenav, $mdToast, notifyService) {
     if (showDebugOutput) { $log.info("Controller loaded!"); }
     
     var lastVisit = localStorage["bgcart-visit-timestamp"];
@@ -51,7 +51,7 @@ app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToas
             $mdToast.simple()
                 .textContent("Remember that BGParts is not a real shopping site.")
                 .position("top right")
-                .hideDelay(8000);
+                .hideDelay(8000)
         );
     }
         
