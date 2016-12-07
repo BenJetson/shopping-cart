@@ -45,13 +45,16 @@ app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToas
     var currentTime = Math.floor(new Date().getTime() / 1000);
     
     if (lastVisit == null || currentTime - lastVisit > 3600) {
+        if (showDebugOutput) { $log.info("Alerted user that the site isn't real via modal."); }
         notifyService.alert("Welcome to Ben's PC Parts! Please be advised that this site " +
                             "is 100% fake and that anything you 'buy' will never be delivered " + 
                             "or ordered. Also, please do not enter any real personal information " + 
                             "into this site. I made this website for educational purposes in a " + 
                             "web design class. Feel free to browse around -- enjoy!",
                             "Please Read", "I Understand");
+        if (showDebugOutput) { $log.info("User dismissed fake site advisory modal. Saving last visit timestamp to disk..."); }
         localStorage["bgcart-visit-timestamp"] = currentTime;
+        if (showDebugOutput) { $log.info("Saving last visit timestamp to disk success."); }
     } else {
         $mdToast.show(
             $mdToast.simple()
@@ -59,6 +62,7 @@ app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToas
                 .position("bottom right")
                 .hideDelay(8000)
         );
+        if (showDebugOutput) { $log.info("Reminded user that the site isn't real via toast."); }
     }
         
     $scope.toggleNav = function(){
