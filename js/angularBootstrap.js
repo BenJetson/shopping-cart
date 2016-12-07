@@ -38,9 +38,23 @@ app.factory('notifyService', ['$mdDialog', function($mdDialog) {
     }
 }]);
 
-app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', function($scope, $log, $mdMedia, $mdSidenav) {
+app.controller('mainCtrl', ['$scope', '$log', '$mdMedia', '$mdSidenav', '$mdToast','notifyService', function($scope, $log, $mdMedia, $mdSidenav, $mdToast, notifyService) {
     if (showDebugOutput) { $log.info("Controller loaded!"); }
     
+    var lastVisit = localStorage["bgcart-visit-timestamp"];
+    var currentTime = Math.floor(new Date().getTime() / 1000);
+    
+    if (lastVisit == null || currentTime - lastVisit > 3600) {
+        notifyService.alert("Welcome to Ben's PC Parts! Please be advised that this site is 100% fake and that anything you 'buy' will never be delivered or ordered. Also, please do not enter any real personal information into this site. I made this website for educational purposes in a web design class. Feel free to browse around -- enjoy!");
+    } else {
+        $mdToast.show(
+            $mdToast.simple()
+                .textContent("Remember that BGParts is not a real shopping site.")
+                .position("top right")
+                .hideDelay(8000);
+        );
+    }
+        
     $scope.toggleNav = function(){
         $mdSidenav('left').toggle();
     };
