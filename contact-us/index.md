@@ -3,4 +3,5 @@ layout: page
 title: Contact
 ---
 
-This contact us page will be populated with information in the near future. 
+Remember that this is a fake site. Nonetheless, if you find and issue with the site, you can open an issue ticket:
+https://github.com/BenJetson/shopping-cart/issues/new
