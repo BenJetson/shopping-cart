@@ -1,5 +1,6 @@
 var showDebugOutput = true;
-var siteURL = "https://benjetson.github.io/shopping-cart/";
+var siteURL = "http://bgodfrey.me/shopping-cart/";
+//var siteURL = "https://benjetson.github.io/shopping-cart/";
 
 function Product(id, name, price, category, img) {
     // fields set from constructor
@@ -39,7 +40,8 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
     
     var self = {
         config: {
-            siteURL: "https://benjetson.github.io/shopping-cart/",
+            siteURL: "http://bgodfrey.me/shopping-cart/",
+            siteURL_OLD: "https://benjetson.github.io/shopping-cart/",
             productDbURL: "products.json",
             cartURL: "cart.html",
             homeURL: "index.html",
