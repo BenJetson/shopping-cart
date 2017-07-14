@@ -1,5 +1,5 @@
 var showDebugOutput = true;
-var siteURL = "http://bgodfrey.me/shopping-cart/";
+var siteURL = "http://www.bgcode.net/shopping-cart/";
 //var siteURL = "https://benjetson.github.io/shopping-cart/";
 
 function Product(id, name, price, category, img) {
