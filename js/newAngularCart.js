@@ -40,7 +40,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
     
     var self = {
         config: {
-            siteURL: "https://www.bgcode.net/shopping-cart/",
+            siteURL: "http://www.bgcode.net/shopping-cart/",
             siteURL_SUPPOSEDTOWORK: "http://bgcode.net/shopping-cart/",
             siteURL_OLD: "https://benjetson.github.io/shopping-cart/",
             productDbURL: "products.json",
