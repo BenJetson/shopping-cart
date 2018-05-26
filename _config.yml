@@ -13,7 +13,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Nothing that is "ordered" through this site will ever 
   be charged to your card or will ever be delivered.
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://www.bgcode.net/shopping-cart/" # URL for production.
+url: "https://www.bgcode.net/shopping-cart/" # URL for production.
 #url: "http://127.0.0.1:4000/" # URL for local development
 github_username: bgodfr5236
 

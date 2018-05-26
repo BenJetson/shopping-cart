@@ -1,5 +1,5 @@
 var showDebugOutput = true;
-var siteURL = "http://www.bgcode.net/shopping-cart/";
+var siteURL = "https://www.bgcode.net/shopping-cart/";
 //var siteURL = "https://benjetson.github.io/shopping-cart/";
 
 function Product(id, name, price, category, img) {
@@ -40,7 +40,7 @@ app.factory('storeManager', ['$http', '$log', '$rootScope', 'notifyService',
     
     var self = {
         config: {
-            siteURL: "http://www.bgcode.net/shopping-cart/",
+            siteURL: "https://www.bgcode.net/shopping-cart/",
             siteURL_SUPPOSEDTOWORK: "http://bgcode.net/shopping-cart/",
             siteURL_OLD: "https://benjetson.github.io/shopping-cart/",
             productDbURL: "products.json",
